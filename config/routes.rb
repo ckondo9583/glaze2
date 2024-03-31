@@ -33,6 +33,12 @@ Rails.application.routes.draw do
     get 'homes/about'
 
     get '/', to: 'homes#top' , as: 'user_top'
+    get '/about', to: 'homes#about' , as: 'user_about'
+    get '/users/unsubscribe', to: 'users#unsubscribe', as: 'users_unsubscribe'
+    patch 'users/:id' ,to: 'userss#update', as: 'users_update'
+    patch '/users/withdraw', to: 'users#withdraw', as: 'users_withdraw'
+    post '/calculations' ,to: 'calculations#create', as: 'calculations_create'
+    patch '/calculations' ,to: 'calculations#update', as: 'calculations_update'
    
   end
 

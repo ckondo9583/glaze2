@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_03_31_074819) do
+ActiveRecord::Schema.define(version: 2024_03_31_140332) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -22,6 +22,43 @@ ActiveRecord::Schema.define(version: 2024_03_31_074819) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_admins_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
+  end
+
+  create_table "calculations", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.string "calculations", default: ""
+    t.integer "temperature"
+    t.text "memo"
+    t.string "image"
+    t.integer "release_status", null: false
+    t.datetime "burning_date"
+    t.integer "knao"
+    t.integer "li2o"
+    t.integer "mgo"
+    t.integer "cao"
+    t.integer "sro"
+    t.integer "bao"
+    t.integer "zno"
+    t.integer "al203"
+    t.integer "sios"
+    t.integer "amount"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "calculate_id", null: false
+    t.text "content", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "favorites", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "calculate_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "users", force: :cascade do |t|

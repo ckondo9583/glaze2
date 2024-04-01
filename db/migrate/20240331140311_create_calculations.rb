@@ -1,10 +1,10 @@
 class CreateCalculations < ActiveRecord::Migration[6.1]
   def change
     create_table :calculations do |t|
-
       t.integer :user_id, null: false
       t.string :calculations, default: "" 
       t.integer :temperature
+      t.integer :tag_id
       t.text :memo
       t.string :image
       t.integer :release_status, null: false

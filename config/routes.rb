@@ -21,9 +21,9 @@ Rails.application.routes.draw do
     resources :tags , only:[:index, :create, :edit, :update, :destroy]
     resources :calculations , only:[:index,:show,:destroy] do
     resources :comments , only:[:index,:destroy],module: :calculations
-    end
+  end
     get 'homes/top'
-    
+
   end
 
 
@@ -34,13 +34,14 @@ Rails.application.routes.draw do
     resources :comments, only:[:create, :destroy],module: :calculations
     resources :favorites, only:[:create, :destroy], module: :calculations
     end
-    
+
     get '/users/unsubscribe', to: 'users#unsubscribe', as: 'users_unsubscribe'
     # patch 'users/:id' ,to: 'users#update', as: 'users_update'
     patch '/users/withdraw', to: 'users#withdraw', as: 'users_withdraw'
     get '/', to: 'homes#top' , as: 'user_top'
     get '/about', to: 'homes#about' , as: 'user_about'
-   
+    post '/', to: 'homes#calculate', as: 'calculate'
+
   end
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

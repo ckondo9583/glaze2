@@ -13,7 +13,7 @@ class Public::HomesController < ApplicationController
     @zno = params[:zno].to_f
     @al2o3 = params[:al2o3].to_f
     @sio2 = params[:sio2].to_f
-    @amount = params[:amount].to_f
+    session[:amount] = @amount = params[:amount].to_f
     
     @kano_result = @kano / 0.1574 * 100
     @li2o_result = @li2o / 1.3414 * 100
@@ -27,15 +27,15 @@ class Public::HomesController < ApplicationController
 
     @total = @kano_result + @li2o_result + @mgo_result + @cao_result + @sro_result + @bao_result + @zno_result + @al2o3_result + @sio2_result
  
-    @fukushimafeldspar = @kano_result/@total * @amount
-    @lithiumcarbonate = @li2o_result/@total * @amount
-    @magnesite = @mgo_result/@total * @amount
-    @whitelimestone = @cao_result/@total * @amount
-    @strontiumcarbonate = @sro_result / @total * @amount
-    @bariumcarbonate = @bao_result / @total * @amount
-    @zincoxide = @zno_result / @total * @amount
-    @kaolin = @al2o3_result / @total * @amount
-    @fukushimasilica = @sio2_result / @total * @amount
+    session[:fukushimafeldspar] = @fukushimafeldspar = @kano_result/@total * @amount
+    session[:lithiumcarbonate] = @lithiumcarbonate = @li2o_result/@total * @amount
+    session[:magnesite] = @magnesite = @mgo_result/@total * @amount
+    session[:whitelimestone] = @whitelimestone = @cao_result/@total * @amount
+    session[:strontiumcarbonate] = @strontiumcarbonate = @sro_result / @total * @amount
+    session[:bariumcarbonate] = @bariumcarbonate = @bao_result / @total * @amount
+    session[:zincoxide] = @zincoxide = @zno_result / @total * @amount
+    session[:kaolin] = @kaolin = @al2o3_result / @total * @amount
+    session[:fukushimasilica] = @fukushimasilica = @sio2_result / @total * @amount
  
     render 'top'
   end

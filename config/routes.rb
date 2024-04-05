@@ -30,7 +30,7 @@ Rails.application.routes.draw do
  scope module: :public do
     resources :homes ,only:[:top,:about]
     resources :users, only: [:show, :edit, :update]
-    resources :calculations, only:[:index, :show, :edit,:create ,:destroy ,:update] do
+    resources :calculations, only:[:new,:index, :show, :edit,:create ,:destroy ,:update] do
     resources :comments, only:[:create, :destroy],module: :calculations
     resources :favorites, only:[:create, :destroy], module: :calculations
     end

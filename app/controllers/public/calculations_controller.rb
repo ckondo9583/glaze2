@@ -12,12 +12,14 @@ class Public::CalculationsController < ApplicationController
    @zincoxide =  session[:zincoxide]
    @kaolin =  session[:kaolin]
    @fukushimasilica =  session[:fukushimasilica]
-
+   
+  
   end
 
   def create
   @calculation = Calculation.new
   @calculation.user_id = current_user.id
+  
 
   if @calculation.save
     redirect_to @calculation

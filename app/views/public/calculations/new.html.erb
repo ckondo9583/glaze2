@@ -16,8 +16,12 @@
      <p>韓国カオリン: <%= @kaolin %></p>
      <p>福島珪石: <%= @fukushimasilica %></p>
 
+     <%= f.radio_button :release_status, "private" %>
+     <%= f.label :release_status_private, "非公開" %>
+     <%= f.radio_button :release_status, "public" %>
+     <%= f.label :release_status_public, "公開" %>
      <%= f.submit "投稿" %>
-   <% end %>
+     <% end %>
 
 <p>焼成温度</p>
 <p>メモ</p>

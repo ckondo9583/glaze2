@@ -2,7 +2,7 @@ class CreateCalculations < ActiveRecord::Migration[6.1]
   def change
     create_table :calculations do |t|
       t.integer :user_id, null: false
-      t.string :calculations, default: "" 
+      t.string :calculation, default: ""
       t.integer :temperature
       t.integer :tag_id
       t.text :memo
@@ -19,7 +19,7 @@ class CreateCalculations < ActiveRecord::Migration[6.1]
       t.integer :al203
       t.integer :sios
       t.integer :amount
-      
+
       t.timestamps
     end
   end

@@ -1,6 +1,6 @@
 ja:
   enums:
-    createCalculations:
+    calculation:
       release_status:
         confine: "非公開"
         release: "公開"

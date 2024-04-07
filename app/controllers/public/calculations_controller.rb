@@ -13,7 +13,7 @@ class Public::CalculationsController < ApplicationController
    @kaolin =  session[:kaolin]
    @fukushimasilica =  session[:fukushimasilica]
    @calculation = Calculation.new
-
+   
   end
 
   def create

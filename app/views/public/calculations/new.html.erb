@@ -6,7 +6,7 @@
 
 
  <%= form_with(model: @calculation, url: calculations_path, local: true) do |f| %>
- 
+
       <div class="field">
         <%= f.label :amount,"配合量"%>
         <%= f.number_field :amount, value: @amount %>
@@ -48,12 +48,11 @@
         <%= f.number_field :fukushimasilica, value: @fukushimasilica %>
   　　</div>
 
-      <%= f.label :release_status, "公開ステータス" %><br>
-      <%= f.radio_button :release_status, "private" %>
-      <%= f.label :release_status_private, "非公開" %><br>
-      <%= f.radio_button :release_status, "public" %>
-      <%= f.label :release_status_public, "公開" %><br>
+  　  <%= f.radio_button :release_status, Calculation.release_statuses.key(0) %>
+   　 <%= f.label :release_status_confine, Calculation.release_statuses_i18n[:confine] %>
+   　<%= f.radio_button :release_status, Calculation.release_statuses.key(1) %>
+   　<%= f.label :release_status_release, Calculation.release_statuses_i18n[:release] %>
+
+
    　  <%= f.submit "投稿" %>
      <% end %>
-     
-     

@@ -18,7 +18,6 @@ class CreateCalculations < ActiveRecord::Migration[6.1]
       t.integer :al203
       t.integer :sios
       t.integer :amount
-
       t.integer :fukushimafeldspar
       t.integer :lithiumcarbonate
       t.integer :magnesite

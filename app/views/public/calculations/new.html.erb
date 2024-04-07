@@ -4,27 +4,56 @@
 <h1>投稿（保存）ページ</h1>
 <%= flash.now[:error] %>
 
-  <%= form_with(model: @calculation, url: calculations_path) do |f| %>
-     <p>合計の計算結果: <%= @amount %></p>
-     <p>福島長石: <%= @fukushimafeldspar %></p>
-     <p>炭酸リチウム: <%= @lithiumcarbonate %></p>
-     <p>マグネサイト: <%= @magnesite %></p>
-     <p>白石灰石: <%= @whitelimestone %></p>
-     <p>炭酸ストロンチウム: <%= @strontiumcarbonate %></p>
-     <p>炭酸バリウム: <%= @bariumcarbonate %></p>
-     <p>亜鉛華: <%= @zincoxide %></p>
-     <p>韓国カオリン: <%= @kaolin %></p>
-     <p>福島珪石: <%= @fukushimasilica %></p>
 
-     <%= f.radio_button :release_status, "private" %>
-     <%= f.label :release_status_private, "非公開" %>
-     <%= f.radio_button :release_status, "public" %>
-     <%= f.label :release_status_public, "公開" %>
-     <%= f.submit "投稿" %>
+ <%= form_with(model: @calculation, url: calculations_path, local: true) do |f| %>
+ 
+      <div class="field">
+        <%= f.label :amount,"配合量"%>
+        <%= f.number_field :amount, value: @amount %>
+  　　</div>
+   　<div class="field">
+        <%= f.label :fukushimafeldspar,"福島長石"%>
+        <%= f.number_field :fukushimafeldspar, value: @fukushimafeldspar %>
+  　　</div>
+   　<div class="field">
+        <%= f.label :lithiumcarbonate,"炭酸リチウム"%>
+        <%= f.number_field :lithiumcarbonate, value: @lithiumcarbonate %>
+  　　</div>
+   　<div class="field">
+        <%= f.label :magnesite,"マグネサイト"%>
+        <%= f.number_field :magnesite, value: @magnesite %>
+  　　</div>
+   　<div class="field">
+        <%= f.label :whitelimestone,"白石石灰"%>
+        <%= f.number_field :whitelimestone, value: @whitelimestone %>
+  　　</div>
+   　<div class="field">
+        <%= f.label :strontiumcarbonate,"炭酸ストロンチウム"%>
+        <%= f.number_field :strontiumcarbonate, value: @strontiumcarbonate %>
+  　　</div>
+     <div class="field">
+        <%= f.label :bariumcarbonate,"炭酸バリウム"%>
+        <%= f.number_field :bariumcarbonate, value: @bariumcarbonate %>
+  　　</div>
+     <div class="field">
+        <%= f.label :zincoxide,"亜鉛華"%>
+        <%= f.number_field :zincoxide, value: @zincoxide %>
+  　　</div>
+     <div class="field">
+        <%= f.label :kaolin,"カオリン"%>
+        <%= f.number_field :kaolin, value: @kaolin %>
+  　　</div>
+  　  <div class="field">
+        <%= f.label :fukushimasilica,"福島珪石"%>
+        <%= f.number_field :fukushimasilica, value: @fukushimasilica %>
+  　　</div>
+
+      <%= f.label :release_status, "公開ステータス" %><br>
+      <%= f.radio_button :release_status, "private" %>
+      <%= f.label :release_status_private, "非公開" %><br>
+      <%= f.radio_button :release_status, "public" %>
+      <%= f.label :release_status_public, "公開" %><br>
+   　  <%= f.submit "投稿" %>
      <% end %>
-
-<p>焼成温度</p>
-<p>メモ</p>
-<p>タグ</p>
-<p>焼成日</p>
-
+     
+     

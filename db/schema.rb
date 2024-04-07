@@ -26,12 +26,11 @@ ActiveRecord::Schema.define(version: 2024_04_06_123326) do
 
   create_table "calculations", force: :cascade do |t|
     t.integer "user_id", null: false
-    t.string "calculation", default: ""
     t.integer "temperature"
     t.integer "tag_id"
     t.text "memo"
     t.string "image"
-    t.integer "release_status", null: false
+    t.integer "release_status", default: 0, null: false
     t.datetime "burning_date"
     t.integer "knao"
     t.integer "li2o"
@@ -43,6 +42,15 @@ ActiveRecord::Schema.define(version: 2024_04_06_123326) do
     t.integer "al203"
     t.integer "sios"
     t.integer "amount"
+    t.integer "fukushimafeldspar"
+    t.integer "lithiumcarbonate"
+    t.integer "magnesite"
+    t.integer "whitelimestone"
+    t.integer "strontiumcarbonate"
+    t.integer "bariumcarbonate"
+    t.integer "zincoxide"
+    t.integer "kaolin"
+    t.integer "fukushimasilica"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

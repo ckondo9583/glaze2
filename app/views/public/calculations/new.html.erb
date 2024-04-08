@@ -47,12 +47,21 @@
         <%= f.label :fukushimasilica,"福島珪石"%>
         <%= f.number_field :fukushimasilica, value: @fukushimasilica %>
   　　</div>
-  　　
      <%= f.radio_button :release_status, :confine %>
      <%= f.label :release_status, "非公開" %>
      <%= f.radio_button :release_status, :release %>
      <%= f.label :release_status, "公開" %>
-   　
-   
+
+   　<%= f.radio_button :release_status, Calculation.release_statuses.key(0) %>
+     <%= f.label :release_status_confine, Calculation.release_statuses_i18n[:confine] %>
+     <%= f.radio_button :release_status, Calculation.release_statuses.key(1) %>
+     <%= f.label :release_status_release, Calculation.release_statuses_i18n[:release]%>
+
+   　<%= f.radio_button :release_status, :confine %>
+   　<%= f.label :release_status, "非公開" %>
+   　<%= f.radio_button :release_status, :release %>
+   　<%= f.label :release_status, "公開" %>
+
+
    　  <%= f.submit "投稿" %>
      <% end %>

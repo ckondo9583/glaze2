@@ -4,7 +4,7 @@ ja:
       release_status:
         confine: "非公開"
         release: "公開"
-activerecord:
+  activerecord:
     errors:
       messages:
         record_invalid: 'バリデーションに失敗しました: %{errors}'
@@ -21,7 +21,6 @@ activerecord:
     - 金
     - 土
     abbr_month_names:
-    -
     - 1月
     - 2月
     - 3月

@@ -116,10 +116,11 @@
         <%= f.number_field :tag_id, value: @tag_id %>
   　　</div>
 
-   　<%= f.radio_button :release_status, Calculation.release_statuses.key(0) %>
-     <%= f.label :release_status_confine, Calculation.release_statuses_i18n[:confine] %>
-     <%= f.radio_button :release_status, Calculation.release_statuses.key(1) %>
-     <%= f.label :release_status_release, Calculation.release_statuses_i18n[:release]%>
+   　<%= f.radio_button :release_status, "confine" %>
+     <%= f.label :release_status_confine, I18n.t("activerecord.enums.calculation.release_status.confine") %>
+
+     <%= f.radio_button :release_status, "release" %>
+     <%= f.label :release_status_release, I18n.t("activerecord.enums.calculation.release_status.release") %>
 
    　  <%= f.submit "投稿" %>
      <% end %>

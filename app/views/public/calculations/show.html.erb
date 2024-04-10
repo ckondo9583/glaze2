@@ -25,4 +25,4 @@
 <p>焼成: <%= number_with_precision(@calculation.fukushimasilica, precision: 1) %></p>
 
 
-<p>公開ステータス: <%= @calculation.release_status %></p>
+<p>公開ステータス: <%= I18n.t("activerecord.enums.calculation.release_status.#{@calculation.release_status}") %></p>

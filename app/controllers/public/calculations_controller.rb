@@ -13,8 +13,6 @@ class Public::CalculationsController < ApplicationController
    @zincoxide =  session[:zincoxide]
    @kaolin =  session[:kaolin]
    @fukushimasilica =  session[:fukushimasilica]
-   @title = session[:title]
-   @subtitle = session[:subtitle]
    @calculation = Calculation.new
 
   end
@@ -26,6 +24,17 @@ class Public::CalculationsController < ApplicationController
   if @calculation.save
     redirect_to @calculation
   else
+   @amount = session[:amount]
+   @fukushimafeldspar = session[:fukushimafeldspar]
+   @lithiumcarbonate = session[:lithiumcarbonate]
+   @magnesite = session[:magnesite]
+   @whitelimestone =session[:whitelimestone]
+   @strontiumcarbonate = session[:strontiumcarbonate]
+   @bariumcarbonate = session[:bariumcarbonate]
+   @zincoxide =  session[:zincoxide]
+   @kaolin =  session[:kaolin]
+   @fukushimasilica =  session[:fukushimasilica]
+  
     render :new
   end
   end

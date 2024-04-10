@@ -1,9 +1,4 @@
 ja:
-  enums:
-    calculation:
-      release_status:
-        confine: "非公開"
-        release: "公開"
   activerecord:
     errors:
       messages:
@@ -11,6 +6,11 @@ ja:
         restrict_dependent_destroy:
           has_one: "%{record}が存在しているので削除できません"
           has_many: "%{record}が存在しているので削除できません"
+    enums:
+      calculation:
+        release_status:
+          confine: "非公開"
+          release: "公開"
   date:
     abbr_day_names:
     - 日

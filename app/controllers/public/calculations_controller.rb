@@ -1,6 +1,7 @@
 class Public::CalculationsController < ApplicationController
  before_action :authenticate_user!
 
+
   def new
    @amount = session[:amount]
    @fukushimafeldspar = session[:fukushimafeldspar]
@@ -12,8 +13,10 @@ class Public::CalculationsController < ApplicationController
    @zincoxide =  session[:zincoxide]
    @kaolin =  session[:kaolin]
    @fukushimasilica =  session[:fukushimasilica]
+   @title = session[:title]
+   @subtitle = session[:subtitle]
    @calculation = Calculation.new
-   
+
   end
 
   def create
@@ -29,6 +32,7 @@ class Public::CalculationsController < ApplicationController
 
 
   def index
+    @calculations = Calculation.all
   end
 
   def show
@@ -43,7 +47,7 @@ class Public::CalculationsController < ApplicationController
   private
 
   def calculation_params
-  params.require(:calculation).permit(:release_status,:fukushimafeldspar,:lithiumcarbonate,:magnesite,:whitelimestone,:strontiumcarbonate,:bariumcarbonate,:zincoxide,:kaolin,:fukushimasilica)
+  params.require(:calculation).permit(:release_status,:fukushimafeldspar,:lithiumcarbonate,:magnesite,:whitelimestone,:strontiumcarbonate,:bariumcarbonate,:zincoxide,:kaolin,:fukushimasilica, :title, :subtitle,:additive1,:additive2,:additive3,:additive4,:additive5,:memo,:tag_id,:temperature,:image,:additive1_amount,:additive2_amount,:additive3_amount,:additive4_amount,:additive5_amount)
   end
 
 end

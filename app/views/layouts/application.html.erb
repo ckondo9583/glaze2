@@ -11,23 +11,30 @@
   </head>
 
   <body>
-    
+
       <header>
     <% if user_signed_in? %>
+      <li>
+        <%= link_to "計算ページ", user_top_path %>
+      </li>
+      <li>
+        <%= link_to "みんなの配合", calculations_path %>
+      </li>
+      <li>
+        <%= link_to "マイページ", user_path(current_user) %>
+      </li>
       <li>
         <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
       </li>
     <% elsif admin_signed_in? %>
-    <li>
-      <a  href="<%=url_for(destroy_admin_session_path)%>" data-method="delete">
-          ログアウト
-        </a>
-      </li>
       <li>
         <%= link_to "計算一覧", admin_calculations_path %>
       </li>
       <li>
         <%= link_to "タグ一覧", admin_tags_index_path %>
+      </li>
+      <li>
+        <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
       </li>
     <% else %>
       <li>
@@ -38,8 +45,8 @@
       </li>
     <% end %>
   </header>
-  
-  
+
+
     <%= yield %>
   </body>
 </html>

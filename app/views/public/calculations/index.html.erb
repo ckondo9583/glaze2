@@ -1,2 +1,7 @@
 <h1>Public::Calculations#index</h1>
 <p>Find me in app/views/public/calculations/index.html.erb</p>
+
+<% @calculations.each do |calculation| %>
+  <h2><%= link_to calculation.title ,calculation  %></h2>
+  <h4><%= calculation.subtitle %></h4>
+<% end %>

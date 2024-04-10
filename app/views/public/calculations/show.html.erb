@@ -1,16 +1,28 @@
 <h1>Public::Calculations#show</h1>
 <p>Find me in app/views/public/calculations/show.html.erb</p>
 
-<p>福島長石: <%= @calculation.fukushimafeldspar %></p>
-<p>炭酸リチウム: <%= @calculation.lithiumcarbonate %></p>
-<p>マグネサイト: <%= @calculation.magnesite %></p>
+<p>タイトル: <%= @calculation.title %></p>
+<p>サブタイトル: <%= @calculation.subtitle %></p>
+<p>福島長石: <%= number_with_precision(@calculation.fukushimafeldspar, precision: 1) %></p>
+<p>炭酸リチウム: <%= number_with_precision(@calculation.lithiumcarbonate, precision: 1) %></p>
+<p>マグネサイト: <%= number_with_precision(@calculation.magnesite, precision: 1) %></p>
 
-<p>白石石灰: <%= @calculation.whitelimestone %></p>
-<p>炭酸ストロンチウム: <%= @calculation.strontiumcarbonate %></p>
-<p>炭酸バリウム: <%= @calculation.bariumcarbonate %></p>
-<p>亜鉛華: <%= @calculation.zincoxide %></p>
-<p>カオリン: <%= @calculation.kaolin %></p>
-<p>福島珪石: <%= @calculation.fukushimasilica %></p>
+<p>白石石灰: <%= number_with_precision(@calculation.whitelimestone, precision: 1) %></p>
+<p>炭酸ストロンチウム: <%= number_with_precision(@calculation.strontiumcarbonate, precision: 1) %></p>
+<p>炭酸バリウム: <%= number_with_precision(@calculation.bariumcarbonate, precision: 1) %></p>
+<p>亜鉛華: <%= number_with_precision(@calculation.zincoxide, precision: 1) %></p>
+<p>カオリン: <%= number_with_precision(@calculation.kaolin, precision: 1) %></p>
+<p>福島珪石: <%= number_with_precision(@calculation.fukushimasilica, precision: 1) %></p>
+
+<% (1..5).each do |i| %>
+  <% additive_column = "additive#{i}" %>
+  <% additive_amount = "additive#{i}_amount" %>
+  <% if @calculation.send(additive_column).present? %>
+    <p><%= @calculation.send(additive_column) %> : <%= number_with_precision(@calculation.send(additive_amount), precision: 1) %></p>
+  <% end %>
+<% end %>
+
+<p>焼成: <%= number_with_precision(@calculation.fukushimasilica, precision: 1) %></p>
 
 
 <p>公開ステータス: <%= @calculation.release_status %></p>

@@ -21,8 +21,12 @@
     <p><%= @calculation.send(additive_column) %> : <%= number_with_precision(@calculation.send(additive_amount), precision: 1) %></p>
   <% end %>
 <% end %>
-
-<p>焼成: <%= number_with_precision(@calculation.fukushimasilica, precision: 1) %></p>
-
+<p>画像: <%= @calculation.image %></p>
+<p>メモ: <%= @calculation.memo %></p>
+<p>焼成温度: <%= @calculation.temperature %>度</p>
+<p>焼成日時: <%= @calculation.burning_date %></p>
+<p>タグ: <%= @calculation.tag_id %></p>
 
 <p>公開ステータス: <%= I18n.t("activerecord.enums.calculation.release_status.#{@calculation.release_status}") %></p>
+
+

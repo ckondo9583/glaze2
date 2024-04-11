@@ -60,7 +60,7 @@
         <%= f.text_field :fukushimasilica, value: @fukushimasilica %>
   　　</div>
       <div class="field">
-        <%= f.label :additive1,"添加物名１"%>
+        <%= f.label :additive1,"添加物１"%>
         <%= f.text_field :additive1, value: @additive1 %>
         <%= f.label :additive1_amount,"配合量(g)"%>
         <%= f.text_field :additive1_amount, value: @additive1_amount %>
@@ -69,36 +69,27 @@
   　　<div class="field">
         <%= f.label :additive2,"添加物２"%>
         <%= f.text_field :additive2, value: @additive2 %>
-  　　</div>
-  　　　<div class="field">
-        <%= f.label :additive2_amount,"添加物２"%>
+        <%= f.label :additive2_amount,"添加物２配合量（g）"%>
         <%= f.text_field :additive2_amount, value: @additive2_amount %>
   　　</div>
   　　　<div class="field">
         <%= f.label :additive3,"添加物3"%>
         <%= f.text_field :additive3, value: @additive3 %>
-  　　</div>
-  　　　<div class="field">
-        <%= f.label :additive3_amount,"添加物3"%>
+         <%= f.label :additive3_amount,"添加物3配合量（g）"%>
         <%= f.text_field :additive3_amount, value: @additive3_amount %>
-  　　</div>
+  　　</div>>
   　　　<div class="field">
         <%= f.label :additive4,"添加物4"%>
         <%= f.text_field :additive4, value: @additive4%>
-  　　</div>
-  　　　<div class="field">
-        <%= f.label :additive4_amount,"添加物4"%>
+        <%= f.label :additive4_amount,"添加物4配合量（g）"%>
         <%= f.text_field :additive4_amount, value: @additive4_amount%>
   　　</div>
   　　　<div class="field">
         <%= f.label :additive5,"添加物5"%>
         <%= f.text_field :additive5, value: @additive5%>
-  　　</div>
-  　　　　<div class="field">
-        <%= f.label :additive5_amount,"添加物5"%>
+        <%= f.label :additive5_amount,"添加物5配合量（g）"%>
         <%= f.text_field :additive5_amount, value: @additive5_amount%>
   　　</div>
-  　　
   　　　<div class="field">
         <%= f.label :image,"画像"%>
         <%= f.text_field :image, value: @image %>
@@ -110,6 +101,10 @@
   　　<div class="field">
         <%= f.label :temperature,"焼成温度"%>
         <%= f.number_field :temperature, value: @temperature %>
+  　　</div>
+  　　<div class="field">
+        <%= f.label :burning_date,"焼成日時"%>
+        <%= f.datetime_field :burning_date, value: @burning_date %>
   　　</div>
   　　<div class="field">
         <%= f.label :tag_id,"タグ"%>

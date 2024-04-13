@@ -1,2 +1,66 @@
 <h1>Public::Calculations#edit</h1>
 <p>Find me in app/views/public/calculations/edit.html.erb</p>
+
+<%= form_with model: @calculation, url: calculations_path(@calculation), method: :patch do |f| %>
+  <%= f.label :title, "タイトル" %>
+  <%= f.text_field :title %>
+
+  <%= f.label :subtitle, "サブタイトル" %>
+  <%= f.text_field :subtitle %>
+
+  <%= f.label :fukushimafeldspar, "福島長石" %>
+  <%= f.number_field :fukushimafeldspar, step: 0.1 %>
+
+  <%= f.label :lithiumcarbonate, "炭酸リチウム" %>
+  <%= f.number_field :lithiumcarbonate, step: 0.1 %>
+
+  <%= f.label :magnesite, "マグネサイト" %>
+  <%= f.number_field :magnesite, step: 0.1 %>
+
+  <%= f.label :whitelimestone, "白石石灰" %>
+  <%= f.number_field :whitelimestone, step: 0.1 %>
+
+  <%= f.label :strontiumcarbonate, "炭酸ストロンチウム" %>
+  <%= f.number_field :strontiumcarbonate, step: 0.1 %>
+
+  <%= f.label :bariumcarbonate, "炭酸バリウム" %>
+  <%= f.number_field :bariumcarbonate, step: 0.1 %>
+
+  <%= f.label :zincoxide, "亜鉛華" %>
+  <%= f.number_field :zincoxide, step: 0.1 %>
+
+  <%= f.label :kaolin, "カオリン" %>
+  <%= f.number_field :kaolin, step: 0.1 %>
+
+  <%= f.label :fukushimasilica, "福島珪石" %>
+  <%= f.number_field :fukushimasilica, step: 0.1 %>
+
+  <% (1..5).each do |i| %>
+    <% additive_column = "additive#{i}" %>
+    <% additive_amount = "additive#{i}_amount" %>
+    <% if @calculation.send(additive_column).present? %>
+      <%= f.label @calculation.send(additive_column), @calculation.send(additive_column) %>
+      <%= f.number_field @calculation.send(additive_amount), step: 0.1 %>
+    <% end %>
+  <% end %>
+
+  <%= f.label :image, "画像" %>
+  <%= f.file_field :image %>
+
+  <%= f.label :memo, "メモ" %>
+  <%= f.text_area :memo %>
+
+  <%= f.label :temperature, "焼成温度" %>
+  <%= f.number_field :temperature %>
+
+  <%= f.label :burning_date, "焼成日時" %>
+  <%= f.datetime_select :burning_date %>
+
+  <%= f.label :tag_id, "タグ" %>
+  <%= f.collection_select :tag_id, Tag.all, :id, :name %>
+
+  <%= f.label :release_status, "公開ステータス" %>
+  <%= f.select :release_status, Calculation.release_statuses.keys.map { |status| [I18n.t("activerecord.enums.calculation.release_status.#{status}"), status] } %>
+
+  <%= f.submit "更新する" %>
+<% end %>

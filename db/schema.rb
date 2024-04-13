@@ -85,6 +85,7 @@ ActiveRecord::Schema.define(version: 2024_04_06_123326) do
   create_table "tag_relations", force: :cascade do |t|
     t.integer "tag_id", null: false
     t.integer "admin_id", null: false
+    t.integer "calculation_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

@@ -34,14 +34,14 @@ class Public::CalculationsController < ApplicationController
    @zincoxide =  session[:zincoxide]
    @kaolin =  session[:kaolin]
    @fukushimasilica =  session[:fukushimasilica]
-  
+
     render :new
   end
   end
 
 
   def index
-    @calculations = Calculation.all
+   @calculations = Calculation.where(release_status: 1)
   end
 
   def show
@@ -51,10 +51,27 @@ class Public::CalculationsController < ApplicationController
   end
 
   def edit
+   @calculation = Calculation.find(params[:id])
+    redirect_to calculations_path unless @calculation.user == current_user
   end
-  
+
+  def update
+    @calculation = Calculation.find(params[:id])
+    if @calculation.update(calculation_params)
+      redirect_to calculation_path(@calculation)
+    else
+      render :edit
+    end
+  end
+
+
   def destroy
+    @calculation = Calculation.find(params[:id])
+    @calculation.destroy
+    redirect_to calculations_path
   end
+
+
 
   private
 

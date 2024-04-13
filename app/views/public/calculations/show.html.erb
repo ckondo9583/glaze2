@@ -30,3 +30,9 @@
 <p>公開ステータス: <%= I18n.t("activerecord.enums.calculation.release_status.#{@calculation.release_status}") %></p>
 
 
+<% if @calculation.user == current_user %>
+
+<%= link_to "編集", edit_calculation_path(@calculation.id),class:'editbtn' %>
+<%= link_to "削除", calculation_path(@calculation.id), method: :delete, "data-confirm" => "本当に削除しますか？",class:'destroybtn' %>
+
+<% end %>

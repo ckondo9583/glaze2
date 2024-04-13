@@ -29,6 +29,7 @@
 
 <p>公開ステータス: <%= I18n.t("activerecord.enums.calculation.release_status.#{@calculation.release_status}") %></p>
 
+<p>投稿者： <%= link_to @calculation.user.name , user_path(@calculation.user)  %></p>
 
 <% if @calculation.user == current_user %>
 

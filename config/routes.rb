@@ -19,7 +19,7 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :users , only:[:index,:show,:edit,:update]
     resources :tags , only:[:index, :create, :edit, :update, :destroy]
-    resources :calculations , only:[:index,:show,:destroy] do
+    resources :calculations , only:[:index,:show,:update,:destroy] do
     resources :comments , only:[:index,:destroy],module: :calculations
   end
     get 'homes/top'

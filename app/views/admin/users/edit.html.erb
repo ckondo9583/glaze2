@@ -1,2 +1,30 @@
 <h1>Admin::Users#edit</h1>
 <p>Find me in app/views/admin/users/edit.html.erb</p>
+
+<h2>User info</h2>
+
+<%= form_with model: [:admin, @user] do |f| %>
+ 
+ <div class="formgroup">
+    <label for="inputName">Name</label><br>
+    <%= f.text_field :name, value: @user.name, autofocus: true, id:"inputName", placeholder:"名前" %><br>
+  </div>
+
+  <div class="formgroup">
+    <label for="inputIntroduction">Introduction</label><br>
+    <%= f.text_area :introduction, value: @user.introduction, autofocus: true, id:"inputIntroduction", placeholder:"Introduction"%>
+  </div>
+
+   <div class="formgroup">
+    <label for="email">Email</label><br>
+    <%= f.text_field :email, value: @user.email, autofocus: true, id:"email", placeholder:"email" %>
+  </div>
+
+  <div class="formgroup">
+    <%= f.submit "Update User",class:'updatebtn' %>
+  </div>
+
+<% end %>
+  </div>
+  
+  <p><%= link_to "戻る", admin_user_path %></p>

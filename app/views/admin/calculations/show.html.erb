@@ -1,2 +1,44 @@
 <h1>Admin::Calculations#show</h1>
 <p>Find me in app/views/admin/calculations/show.html.erb</p>
+
+<p>タイトル: <%= @calculation.title %></p>
+<p>サブタイトル: <%= @calculation.subtitle %></p>
+<p>福島長石: <%= number_with_precision(@calculation.fukushimafeldspar, precision: 1) %></p>
+<p>炭酸リチウム: <%= number_with_precision(@calculation.lithiumcarbonate, precision: 1) %></p>
+<p>マグネサイト: <%= number_with_precision(@calculation.magnesite, precision: 1) %></p>
+
+<p>白石石灰: <%= number_with_precision(@calculation.whitelimestone, precision: 1) %></p>
+<p>炭酸ストロンチウム: <%= number_with_precision(@calculation.strontiumcarbonate, precision: 1) %></p>
+<p>炭酸バリウム: <%= number_with_precision(@calculation.bariumcarbonate, precision: 1) %></p>
+<p>亜鉛華: <%= number_with_precision(@calculation.zincoxide, precision: 1) %></p>
+<p>カオリン: <%= number_with_precision(@calculation.kaolin, precision: 1) %></p>
+<p>福島珪石: <%= number_with_precision(@calculation.fukushimasilica, precision: 1) %></p>
+
+<% (1..5).each do |i| %>
+  <% additive_column = "additive#{i}" %>
+  <% additive_amount = "additive#{i}_amount" %>
+  <% if @calculation.send(additive_column).present? %>
+    <p><%= @calculation.send(additive_column) %> : <%= number_with_precision(@calculation.send(additive_amount), precision: 1) %></p>
+  <% end %>
+<% end %>
+<p>画像: <%= @calculation.image %></p>
+<p>メモ: <%= @calculation.memo %></p>
+<p>焼成温度: <%= @calculation.temperature %>度</p>
+<p>焼成日時: <%= @calculation.burning_date %></p>
+<p>タグ: <%= @calculation.tag_id %></p>
+
+<p>公開ステータス: <%= I18n.t("activerecord.enums.calculation.release_status.#{@calculation.release_status}") %></p>
+
+<p>投稿者： <%= link_to @calculation.user.name , admin_user_path(@calculation.user)  %></p>
+
+
+<%= form_with model: [:admin, @calculation] , url: admin_calculation_path, method: :patch do |f| %>
+
+  <%= f.label :release_status, "公開ステータス" %>
+  <%= f.select :release_status, Calculation.release_statuses.keys.map { |status| [I18n.t("activerecord.enums.calculation.release_status.#{status}"), status] } %>
+
+  <%= f.submit "更新する" %>
+<% end %>
+
+<%= link_to "編集", edit_calculation_path(@calculation.id),class:'editbtn' %>
+<%= link_to "削除", calculation_path(@calculation.id), method: :delete, "data-confirm" => "本当に削除しますか？",class:'destroybtn' %>

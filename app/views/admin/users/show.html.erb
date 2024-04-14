@@ -1,2 +1,13 @@
 <h1>Admin::Users#show</h1>
 <p>Find me in app/views/admin/users/show.html.erb</p>
+
+
+<h4><%= @user.name  %></h4>
+<%= link_to "編集", edit_admin_user_path,class:'editbtn' %>
+<p><%= @user.introduction  %></p>
+
+
+<% @calculations.each do |calculation| %>
+  <p><%= link_to calculation.title ,admin_calculation_path(calculation)   %></p>
+  <p><%= calculation.subtitle %></p>
+<% end %>

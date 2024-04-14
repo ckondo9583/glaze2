@@ -1,4 +1,4 @@
 class TagRelation < ApplicationRecord
-  belongs_to :calculation
-  belongs_to :tag
+  belongs_to :admin
+  has_many :tag
 end

@@ -1,5 +1,4 @@
 class Tag < ApplicationRecord
-  has_many :tag_relation, dependent: :destroy
-  has_many :calculation, through: :tag_relation
-  
+  belongs_to :tag_relation, dependent: :destroy
+
 end

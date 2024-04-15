@@ -31,6 +31,21 @@
 
 <p>投稿者： <%= link_to @calculation.user.name , user_path(@calculation.user)  %></p>
 
+<!--コメント投稿機能-->
+
+<%= form_with model: @comment, url: calculation_comments_path(@calculation), local: false do |f| %>
+ <%= f.text_area :content, rows:'5',placeholder: "Any comments on this post?", class:"form-control mt-3"  %>
+   <div class="text-right">
+    <%= f.submit "Submit", class: "btn btn-primary mt-3 mb-3" %>
+   </div>
+<% end %>
+<!--コメント一覧機能-->
+<% @calculation_comments.each do |comment| %>
+  <p><%= comment.user.name %></p>
+  <p><%= comment.content %></p>
+  <%= link_to "Delete", calculation_comment_path(comment.calculation, comment), method: :delete, remote: true, "data-confirm" => t('comments.create.delete_confirm'), class: "btn-sm btn-danger" %>
+<% end %>
+
 <% if @calculation.user == current_user %>
 
 <%= link_to "編集", edit_calculation_path(@calculation.id),class:'editbtn' %>

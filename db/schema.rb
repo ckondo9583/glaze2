@@ -26,6 +26,8 @@ ActiveRecord::Schema.define(version: 2024_04_06_123326) do
 
   create_table "calculations", force: :cascade do |t|
     t.integer "user_id", null: false
+    t.integer "comment_id"
+    t.integer "favirite_id"
     t.integer "temperature"
     t.integer "tag_id"
     t.text "memo"
@@ -69,7 +71,7 @@ ActiveRecord::Schema.define(version: 2024_04_06_123326) do
 
   create_table "comments", force: :cascade do |t|
     t.integer "user_id", null: false
-    t.integer "calculate_id", null: false
+    t.integer "calculation_id", null: false
     t.text "content", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -77,7 +79,7 @@ ActiveRecord::Schema.define(version: 2024_04_06_123326) do
 
   create_table "favorites", force: :cascade do |t|
     t.integer "user_id", null: false
-    t.integer "calculate_id", null: false
+    t.integer "calculation_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

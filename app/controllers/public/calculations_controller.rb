@@ -48,6 +48,8 @@ class Public::CalculationsController < ApplicationController
    @calculation = Calculation.find(params[:id])
    puts @calculation.inspect
    @user = current_user
+   @comment = Comment.new
+   @calculation_comments = @calculation.comments
   end
 
   def edit

@@ -2,6 +2,8 @@ class CreateCalculations < ActiveRecord::Migration[6.1]
   def change
     create_table :calculations do |t|
       t.integer :user_id, null: false
+      t.integer :comment_id
+      t.integer :favirite_id
       t.integer :temperature
       t.integer :tag_id
       t.text :memo

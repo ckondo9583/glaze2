@@ -4,4 +4,5 @@ class Calculation < ApplicationRecord
   has_many :tag_relation, dependent: :destroy
   has_many :tags, through: :tag_relation
   validates :title, presence: true
+  has_many :comments, dependent: :destroy
 end

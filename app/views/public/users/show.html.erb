@@ -2,14 +2,13 @@
 <p>Find me in app/views/public/users/show.html.erb</p>
 
 
-<h4><%= @user.name  %></h4>
-<% if @user == current_user %>
-<%= link_to "編集", edit_user_path,class:'editbtn' %>
+<h4><%= @user.name %></h4>
+<% if @user == current_user && @user.name != "guestuser" %>
+  <%= link_to "編集", edit_user_path(@user), class: 'editbtn' %>
 <% end %>
-<p><%= @user.introduction  %></p>
-
+<p><%= @user.introduction %></p>
 
 <% @calculations.each do |calculation| %>
-  <p><%= link_to calculation.title ,calculation  %></p>
+  <p><%= link_to calculation.title, calculation %></p>
   <p><%= calculation.subtitle %></p>
 <% end %>

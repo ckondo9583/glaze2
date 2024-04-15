@@ -15,6 +15,10 @@ Rails.application.routes.draw do
   devise_for :admin, skip: [:registrations, :passwords], controllers: {
   sessions: "admin/sessions"
 }
+  # ゲストログイン
+  devise_scope :user do
+    post 'users/guest_sign_in', to: 'users/sessions#guest_sign_in'
+  end
 
   namespace :admin do
     resources :users , only:[:index,:show,:edit,:update]
@@ -31,8 +35,8 @@ Rails.application.routes.draw do
     resources :homes ,only:[:top,:about]
     resources :users, only: [:show, :edit, :update]
     resources :calculations, only: [:new, :index, :show, :edit, :update, :create, :destroy] do
-    resources :comments, only:[:create, :destroy],module: :calculations
-    resources :favorites, only:[:create, :destroy], module: :calculations
+    resources :comments, only:[:create, :destroy]
+    resources :favorites, only:[:create, :destroy]
     end
 
     get '/users/unsubscribe', to: 'users#unsubscribe', as: 'users_unsubscribe'
@@ -43,6 +47,9 @@ Rails.application.routes.draw do
     post '/', to: 'homes#calculate', as: 'calculate'
 
   end
+
+
+
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

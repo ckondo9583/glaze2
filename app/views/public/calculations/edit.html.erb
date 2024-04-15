@@ -57,7 +57,7 @@
   <%= f.datetime_select :burning_date %>
 
   <%= f.label :tag_id, "タグ" %>
-  <%= f.collection_select :tag_id, Tag.all, :id, :name %>
+  <%= f.collection_select :tag_id, Tag.all, :id, :tag_name %>
 
   <%= f.label :release_status, "公開ステータス" %>
   <%= f.select :release_status, Calculation.release_statuses.keys.map { |status| [I18n.t("activerecord.enums.calculation.release_status.#{status}"), status] } %>

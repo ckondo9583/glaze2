@@ -107,8 +107,8 @@
         <%= f.datetime_field :burning_date, value: @burning_date %>
   　　</div>
   　　<div class="field">
-        <%= f.label :tag_id,"タグ"%>
-        <%= f.number_field :tag_id, value: @tag_id %>
+        <%= f.label :tag_id, "タグ" %>
+        <%= f.collection_select :tag_id, Tag.all, :id, :tag_name %>
   　　</div>
 
    　<%= f.radio_button :release_status, "confine" %>

@@ -22,6 +22,7 @@ class Public::CalculationsController < ApplicationController
   @calculation.user_id = current_user.id
 
   if @calculation.save
+   TagRelation.create!(tag_id: params[:calculation][:tag_id],calculation_id: @calculation.id,admin_id:0)
     redirect_to @calculation
   else
    @amount = session[:amount]
@@ -50,6 +51,10 @@ class Public::CalculationsController < ApplicationController
    @user = current_user
    @comment = Comment.new
    @calculation_comments = @calculation.comments
+   @calculation = Calculation.find(params[:id])
+   # @tag = Tag.find(@calculation.tag_id)
+   # @calculation_tags = @calculation.tags
+    @tags = @calculation.tags
   end
 
   def edit

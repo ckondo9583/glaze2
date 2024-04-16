@@ -25,7 +25,12 @@
 <p>メモ: <%= @calculation.memo %></p>
 <p>焼成温度: <%= @calculation.temperature %>度</p>
 <p>焼成日時: <%= @calculation.burning_date %></p>
-<p>タグ: <%= @calculation.tag_id %></p>
+
+<p><% @tags.each do |tag| %>
+タグ:  <%= tag.tag_name %>
+<% end %>
+</p>
+ 
 
 <p>公開ステータス: <%= I18n.t("activerecord.enums.calculation.release_status.#{@calculation.release_status}") %></p>
 

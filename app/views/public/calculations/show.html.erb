@@ -26,8 +26,8 @@
 <p>焼成温度: <%= @calculation.temperature %>度</p>
 <p>焼成日時: <%= @calculation.burning_date %></p>
 
-<p><% @tags.each do |tag| %>
-タグ:  <%= tag.tag_name %>
+<p>タグ: <% @tags.each do |tag| %>
+ <%= tag.tag_name %> 
 <% end %>
 </p>
  

@@ -56,8 +56,10 @@
   <%= f.label :burning_date, "焼成日時" %>
   <%= f.datetime_select :burning_date %>
 
-  <%= f.label :tag_id, "タグ" %>
-  <%= f.collection_select :tag_id, Tag.all, :id, :tag_name %>
+  <%= f.label :tag_ids, "タグ" %>
+  <%= f.collection_check_boxes :tag_ids, Tag.all, :id, :tag_name do |b| %>
+  <%= b.label { b.check_box + b.text } %>
+  <% end %>
 
   <%= f.label :release_status, "公開ステータス" %>
   <%= f.select :release_status, Calculation.release_statuses.keys.map { |status| [I18n.t("activerecord.enums.calculation.release_status.#{status}"), status] } %>

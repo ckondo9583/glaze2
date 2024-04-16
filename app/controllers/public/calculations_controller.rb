@@ -19,11 +19,11 @@ class Public::CalculationsController < ApplicationController
 
   def create
   @calculation = Calculation.new(calculation_params)
+  @calculation.tag_ids = params[:calculation][:tag_ids]
   @calculation.user_id = current_user.id
 
   if @calculation.save
-   TagRelation.create!(tag_id: params[:calculation][:tag_id],calculation_id: @calculation.id,admin_id:0)
-    redirect_to @calculation
+   redirect_to @calculation
   else
    @amount = session[:amount]
    @fukushimafeldspar = session[:fukushimafeldspar]
@@ -83,7 +83,7 @@ class Public::CalculationsController < ApplicationController
   private
 
   def calculation_params
-  params.require(:calculation).permit(:release_status,:fukushimafeldspar,:lithiumcarbonate,:magnesite,:whitelimestone,:strontiumcarbonate,:bariumcarbonate,:zincoxide,:kaolin,:fukushimasilica, :title, :subtitle,:additive1,:additive2,:additive3,:additive4,:additive5,:memo,:tag_id,:temperature,:image,:additive1_amount,:additive2_amount,:additive3_amount,:additive4_amount,:additive5_amount,:burning_date,:memo)
+  params.require(:calculation).permit(:release_status,:fukushimafeldspar,:lithiumcarbonate,:magnesite,:whitelimestone,:strontiumcarbonate,:bariumcarbonate,:zincoxide,:kaolin,:fukushimasilica, :title, :subtitle,:additive1,:additive2,:additive3,:additive4,:additive5,:memo,:tag_id,:tag_ids,:temperature,:image,:additive1_amount,:additive2_amount,:additive3_amount,:additive4_amount,:additive5_amount,:burning_date,:memo)
   end
 
 end

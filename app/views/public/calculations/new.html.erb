@@ -106,11 +106,14 @@
         <%= f.label :burning_date,"焼成日時"%>
         <%= f.datetime_field :burning_date, value: @burning_date %>
   　　</div>
-  　　<div class="field">
-        <%= f.label :tag_id, "タグ" %>
-        <%= f.collection_select :tag_ids, Tag.all, :id, :tag_name, {}, { multiple: true } %>
-  　　</div>
-
+  　<div class="field">
+   　 <%= f.label :tag_ids, "タグ" %>
+   　 <%= f.collection_check_boxes :tag_ids, Tag.all, :id, :tag_name do |b| %>
+      <%= b.label { b.check_box + b.text } %>
+    　<% end %>
+</div>
+  　
+  　
    　<%= f.radio_button :release_status, "confine" %>
      <%= f.label :release_status_confine, I18n.t("activerecord.enums.calculation.release_status.confine") %>
 

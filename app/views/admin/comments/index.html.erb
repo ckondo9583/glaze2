@@ -1,2 +1,13 @@
 <h1>Admin::Comments#index</h1>
 <p>Find me in app/views/admin/comments/index.html.erb</p>
+
+
+<p>
+  <% @comments.each_with_index do |comment, index| %>
+    <%= comment.content %>
+    <%= link_to @users[index].name, admin_user_path(@users[index]) %>
+    <%= link_to "削除", admin_calculation_comment_path(@calculation, comment), method: :delete, data: { confirm: "本当に削除しますか？" }, class: 'destroybtn' %>
+
+  <% end %>
+</p>
+

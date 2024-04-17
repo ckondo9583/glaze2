@@ -14,7 +14,7 @@ class Public::CommentsController < ApplicationController
     @calculation = Calculation.find(params[:calculation_id])
     @calculation_comments = @calculation.comments
     Comment.find_by(id: params[:id], calculation_id: params[:calculation_id]).destroy
-    redirect_to calculation_path(@calculation)
+     redirect_to calculation_path(@calculation)
   end
 
   private

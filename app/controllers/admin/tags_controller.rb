@@ -5,6 +5,7 @@ class Admin::TagsController < ApplicationController
  def index
     @tags = Tag.all
     @tag = Tag.new
+    @calculation = Calculation.first
  end
 
 

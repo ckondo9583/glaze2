@@ -40,5 +40,3 @@
   <%= f.submit "更新する" %>
 <% end %>
 
-<%= link_to "編集", edit_calculation_path(@calculation.id),class:'editbtn' %>
-<%= link_to "削除", calculation_path(@calculation.id), method: :delete, "data-confirm" => "本当に削除しますか？",class:'destroybtn' %>

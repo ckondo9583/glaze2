@@ -40,6 +40,12 @@
         <%= link_to "タグ一覧", admin_tags_index_path %>
       </li>
       <li>
+        <%= link_to "ユーザー一覧", admin_users_path %>
+      </li>
+      <li>
+        <%= link_to "コメント一覧",  admin_calculation_comments_path(@calculation.id) %>
+      </li>
+      <li>
         <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
       </li>
     <% else %>

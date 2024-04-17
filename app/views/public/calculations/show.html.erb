@@ -27,10 +27,10 @@
 <p>焼成日時: <%= @calculation.burning_date %></p>
 
 <p>タグ: <% @tags.each do |tag| %>
- <%= tag.tag_name %> 
+ <%= tag.tag_name %>
 <% end %>
 </p>
- 
+
 
 <p>公開ステータス: <%= I18n.t("activerecord.enums.calculation.release_status.#{@calculation.release_status}") %></p>
 

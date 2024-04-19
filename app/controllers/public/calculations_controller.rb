@@ -14,7 +14,6 @@ class Public::CalculationsController < ApplicationController
    @kaolin =  session[:kaolin]
    @fukushimasilica =  session[:fukushimasilica]
    @calculation = Calculation.new
-
   end
 
   def create
@@ -83,7 +82,7 @@ class Public::CalculationsController < ApplicationController
   private
 
   def calculation_params
-  params.require(:calculation).permit(:release_status,:fukushimafeldspar,:lithiumcarbonate,:magnesite,:whitelimestone,:strontiumcarbonate,:bariumcarbonate,:zincoxide,:kaolin,:fukushimasilica, :title, :subtitle,:additive1,:additive2,:additive3,:additive4,:additive5,:memo,:tag_id,:tag_ids,:temperature,:image,:additive1_amount,:additive2_amount,:additive3_amount,:additive4_amount,:additive5_amount,:burning_date,:memo)
+  params.require(:calculation).permit(:release_status,:fukushimafeldspar,:lithiumcarbonate,:magnesite,:whitelimestone,:strontiumcarbonate,:bariumcarbonate,:zincoxide,:kaolin,:fukushimasilica, :title, :subtitle,:additive1,:additive2,:additive3,:additive4,:additive5,:memo,:tag_id,:tag_ids,:temperature,:image,:additive1_amount,:additive2_amount,:additive3_amount,:additive4_amount,:additive5_amount,:burning_date,:memo,favorites_attributes: [:id, :user_id, :_destroy])
   end
 
 end

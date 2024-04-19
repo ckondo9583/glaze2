@@ -4,12 +4,16 @@ class Public::UsersController < ApplicationController
   
 
   def show
+    @calculation = Calculation.first
     @user = User.find(params[:id])
     if current_user == @user || current_user?
       @calculations = @user.calculations
     else
       @calculations = @user.calculations.where(release_status: 1)
     end
+    #いいね一覧表示用
+  
+    @favorites = current_user.favorites.includes(:calculation)
   end
 
 

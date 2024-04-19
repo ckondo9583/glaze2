@@ -36,7 +36,7 @@ Rails.application.routes.draw do
     resources :users, only: [:show, :edit, :update]
     resources :calculations, only: [:new, :index, :show, :edit, :update, :create, :destroy] do
     resources :comments, only:[:create, :destroy]
-    resources :favorites, only:[:create, :destroy]
+    resources :favorites, only: [:index ,:create, :destroy]
     end
 
     get '/users/unsubscribe', to: 'users#unsubscribe', as: 'users_unsubscribe'

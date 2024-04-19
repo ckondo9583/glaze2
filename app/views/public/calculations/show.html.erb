@@ -36,6 +36,21 @@
 
 <p>投稿者： <%= link_to @calculation.user.name , user_path(@calculation.user)  %></p>
 
+<!--いいね機能-->
+<% if @calculation.favorited?(current_user) %>
+      <!--一致するレコードが存在する＝すでにいいね済みの場合はdestroyアクションへ-->
+      <%= link_to calculation_favorite_path(@calculation.id), method: :delete do %>
+          <span style="color:red;">お気に入り済み♡︎</span>
+      <% end %>
+<% else %>
+      <!--一致するレコードが存在しない＝まだいいねしていない場合はcreateアクションへ-->
+      <%= link_to calculation_favorites_path(@calculation.id), method: :post do %>
+           <span>お気に入りに登録する♡︎</span>
+      <% end %>
+<% end %>
+
+
+
 <!--コメント投稿機能-->
 
 <%= form_with model: @comment, url: calculation_comments_path(@calculation), local: false do |f| %>

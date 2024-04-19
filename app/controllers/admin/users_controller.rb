@@ -1,18 +1,15 @@
 class Admin::UsersController < ApplicationController
   before_action :authenticate_admin!
   def index
-    @calculation = Calculation.first
     @users = User.all
   end
 
   def show
-    @calculation = Calculation.find(params[:id])
     @user = User.find(params[:id])
     @calculations = @user.calculations
   end
 
   def edit
-    @calculation = Calculation.first
     @user = User.find(params[:id])
   end
 
@@ -37,7 +34,8 @@ class Admin::UsersController < ApplicationController
   end
 
   def calculation_params
-  params.require(:calculation).permit(:release_status,:fukushimafeldspar,:lithiumcarbonate,:magnesite,:whitelimestone,:strontiumcarbonate,:bariumcarbonate,:zincoxide,:kaolin,:fukushimasilica, :title, :subtitle,:additive1,:additive2,:additive3,:additive4,:additive5,:memo,:tag_id,:temperature,:image,:additive1_amount,:additive2_amount,:additive3_amount,:additive4_amount,:additive5_amount,:burning_date,:memo)
+  params.require(:calculation).permit(:release_status,:fukushimafeldspar,:lithiumcarbonate,:magnesite,:whitelimestone,:strontiumcarbonate,:bariumcarbonate,:zincoxide,:kaolin,:fukushimasilica, :title, :subtitle,:additive1,:additive2,:additive3,:additive4,:additive5,:memo,:tag_id,:tag_ids,:temperature,:image,:additive1_amount,:additive2_amount,:additive3_amount,:additive4_amount,:additive5_amount,:burning_date,:memo,favorites_attributes: [:id, :user_id, :_destroy])
   end
+
 
 end

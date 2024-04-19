@@ -8,7 +8,21 @@
 <% end %>
 <p><%= @user.introduction %></p>
 
+<h3>投稿一覧</h3>
 <% @calculations.each do |calculation| %>
   <p><%= link_to calculation.title, calculation %></p>
   <p><%= calculation.subtitle %></p>
 <% end %>
+
+<h3>いいねした投稿一覧</h3>
+
+<% @favorites.each do |favorite| %>
+
+  <p>タイトル: <%= link_to favorite.calculation.title ,calculation_path(favorite.calculation)  %></p>
+
+  <p>投稿者: <%= link_to favorite.calculation.user.name , user_path(favorite.calculation.user) %></p>
+
+<% end %>
+
+
+<%= link_to "いいね一覧", calculation_favorites_path(@calculation.id) %>

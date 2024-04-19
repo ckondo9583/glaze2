@@ -1,0 +1,9 @@
+<h1>favorites#index</h1>
+
+<% @favorites.each do |favorite| %>
+
+  <p>タイトル: <%= link_to favorite.calculation.title ,calculation_path(favorite.calculation)  %></p>
+
+  <p>投稿者: <%= link_to favorite.calculation.user.name , user_path(favorite.calculation.user) %></p>
+
+<% end %>

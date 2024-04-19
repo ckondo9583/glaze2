@@ -10,6 +10,7 @@ class Public::SessionsController < Devise::SessionsController
 
   # POST /resource/sign_in
    def create
+      puts params.inspect 
      super
    end
 
@@ -31,7 +32,7 @@ class Public::SessionsController < Devise::SessionsController
    end
   # If you have extra params to permit, append them to the sanitizer.
    def configure_sign_in_params
-     devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
+       devise_parameter_sanitizer.permit(:sign_in, keys: [:email, :encrypted_password])
    end
    
    def guest_sign_in

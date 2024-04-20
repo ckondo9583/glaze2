@@ -5,6 +5,7 @@
 <h4><%= @user.name %></h4>
 <% if @user == current_user && @user.name != "guestuser" %>
   <%= link_to "編集", edit_user_path(@user), class: 'editbtn' %>
+  <%= link_to "退会する", users_unsubscribe_path(@user.id), method: :get, class: 'editbtn' %>
 <% end %>
 <p><%= @user.introduction %></p>
 

@@ -2,15 +2,18 @@ class Admin::UsersController < ApplicationController
   before_action :authenticate_admin!
   def index
     @users = User.all
+    @calculation = Calculation.first
   end
 
   def show
     @user = User.find(params[:id])
     @calculations = @user.calculations
+    @calculation = Calculation.first
   end
 
   def edit
     @user = User.find(params[:id])
+    @calculation = Calculation.first
   end
 
    def update
@@ -26,7 +29,7 @@ class Admin::UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:name,:email ,:introduction)
+    params.require(:user).permit(:name,:email ,:introduction,:is_deleted)
   end
 
   def current_user?

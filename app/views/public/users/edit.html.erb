@@ -10,19 +10,22 @@
   <label for="inputName">Name</label><br>
   <%= f.text_field :name, autofocus: true, id:"inputName", placeholder:"名前",class:'text_field'%><br>
   </div>
-  
+
   <div class="formgroup">
   <label for="inputIntroduction">Introduction</label><br>
   <%= f.text_area :introduction, autofocus: true, id:"inputIntroduction", placeholder:"Introduction",class:'text_area'%>
   </div>
-  
-   
+
+
   <div class="formgroup">
   <label for="email">Email</label><br>
   <%= f.text_area :email, autofocus: true, id:"email", placeholder:"email",class:'text_area'%>
   </div>
-  
+
   <div class="formgroup">
   <%= f.submit "Update User",class:'updatebtn' %>
   </div>
+
+
 <% end %>
+

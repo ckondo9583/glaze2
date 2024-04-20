@@ -4,4 +4,5 @@
 <% @users.each do |user| %>
   <h3><%=  link_to user.name, admin_user_path(user)  %></h3>
   <h4><%= user.introduction %></h4>
+  <h4><%= user.is_deleted %></h4>
 <% end %>

@@ -19,8 +19,6 @@ class Public::SessionsController < Devise::SessionsController
      super
    end
    
-   
-
    protected
 
    def after_sign_in_path_for(resource)
@@ -40,5 +38,20 @@ class Public::SessionsController < Devise::SessionsController
     sign_in end_user
     redirect_to root_path, notice: 'ゲストユーザーとしてログインしました。'
    end
+   
+   def reject_end_user
+    @user = User.find_by(email: params[:user][:email])
+    if @user
+      if @user.valid_password?(params[:user][:password]) && @user.is_deleted 
+        flash[:notice] = "退会済みです。再度ご登録をしてご利用ください"
+        redirect_to new_user_registration_path
+      else
+        flash[:notice] = "項目を入力してください"  # 必要に応じて適切なエラーメッセージに変更してください
+      end
+    else
+      flash[:notice] = "該当するユーザーが見つかりません"
+    end
+   end
+  
    
 end

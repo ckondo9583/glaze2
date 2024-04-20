@@ -5,6 +5,7 @@ class Admin::CommentsController < ApplicationController
   @calculation = Calculation.first
   @comments = Comment.all
   @users = @comments.map { |comment| User.find(comment.user_id) }
+  
   end
   
   def destroy

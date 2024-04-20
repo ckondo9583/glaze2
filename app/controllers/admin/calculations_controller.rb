@@ -4,6 +4,7 @@ class Admin::CalculationsController < ApplicationController
 
   def index
    @calculations = Calculation.all
+   @calculations = Calculation.joins(:user).where(users: { is_deleted: false })
    @calculation = @calculations.first
   end
 

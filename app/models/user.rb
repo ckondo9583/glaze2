@@ -18,8 +18,6 @@ class User < ApplicationRecord
   def active_for_authentication?
     super && (is_deleted == false)
   end
-    # ユーザーが非アクティブになった場合計算結果は削除する
-   def soft_delete
-   calculations.where(user_id: id).update_all(is_deleted: true)
-   end
+
+
 end

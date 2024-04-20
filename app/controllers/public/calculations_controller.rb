@@ -41,7 +41,7 @@ class Public::CalculationsController < ApplicationController
 
 
   def index
-   @calculations = Calculation.where(release_status: 1)
+    @calculations = Calculation.joins(:user).where(release_status: 1, users: { is_deleted: false })
   end
 
   def show
@@ -49,11 +49,11 @@ class Public::CalculationsController < ApplicationController
    puts @calculation.inspect
    @user = current_user
    @comment = Comment.new
-   @calculation_comments = @calculation.comments
-   @calculation = Calculation.find(params[:id])
+   @active_comments = @calculation.comments.joins(:user).where(users: { is_deleted: false })
+     # アクティブなコメントのみを取得
    # @tag = Tag.find(@calculation.tag_id)
    # @calculation_tags = @calculation.tags
-    @tags = @calculation.tags
+   @tags = @calculation.tags
   end
 
   def edit

@@ -1,7 +1,9 @@
 class Admin::UsersController < ApplicationController
   before_action :authenticate_admin!
   def index
-    @users = User.all
+    # アクティブユーザーだけ表示
+    @users = User.where(is_deleted: false)
+  
     @calculation = Calculation.first
   end
 

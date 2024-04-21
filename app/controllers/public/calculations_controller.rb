@@ -41,7 +41,7 @@ class Public::CalculationsController < ApplicationController
 
 
   def index
-    @calculations = Calculation.joins(:user).where(release_status: 1, users: { is_deleted: false })
+     @calculations = Calculation.joins(:user).where(release_status: 1, users: { is_deleted: false })
   end
 
   def show
@@ -49,12 +49,23 @@ class Public::CalculationsController < ApplicationController
    puts @calculation.inspect
    @user = current_user
    @comment = Comment.new
+   # @calculation_comments = @calculation.comments
    @active_comments = @calculation.comments.joins(:user).where(users: { is_deleted: false })
-     # アクティブなコメントのみを取得
+   # アクティブなコメントのみを取得(show側も@active_commentsに変更)
    # @tag = Tag.find(@calculation.tag_id)
    # @calculation_tags = @calculation.tags
    @tags = @calculation.tags
+
   end
+
+  def search
+  keyword = params[:keyword]
+  @calculations = Calculation.joins(:user)
+                             .where('user_id = ? OR temperature = ? OR tag_id = ? OR memo LIKE ? OR title LIKE ? OR subtitle LIKE ? OR burning_date = ? OR additive1 LIKE ? OR additive2 LIKE ? OR additive3 LIKE ? OR additive4 LIKE ? OR additive5 LIKE ?',
+                                   keyword, keyword, keyword, "%#{keyword}%", "%#{keyword}%", "%#{keyword}%", keyword, "%#{keyword}%", "%#{keyword}%", "%#{keyword}%", "%#{keyword}%", "%#{keyword}%")
+  render :index
+  end
+
 
   def edit
    @calculation = Calculation.find(params[:id])

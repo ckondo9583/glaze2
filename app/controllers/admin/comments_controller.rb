@@ -3,9 +3,9 @@ class Admin::CommentsController < ApplicationController
 
   def index
   @calculation = Calculation.first
-  @comments = Comment.all
+  # @comments = Comment.all
+  @comments = Comment.includes(:user).where(users: { is_deleted: false })
   @users = @comments.map { |comment| User.find(comment.user_id) }
-  
   end
   
   def destroy

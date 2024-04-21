@@ -16,8 +16,8 @@ class Public::UsersController < ApplicationController
       @calculations = @user.calculations.where(release_status: 1)
     end
     #いいね一覧表示用
-
-    @favorites = current_user.favorites.includes(:calculation)
+     @favorites = current_user.favorites.includes(:calculation)
+    #  @favorites = current_user.favorites.joins(:calculation).where(users: { is_deleted: false })
   end
 
 

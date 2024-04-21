@@ -4,6 +4,7 @@ class Public::FavoritesController < ApplicationController
 def index
   @calculation = Calculation.find(params[:calculation_id])
   @favorites = current_user.favorites.includes(:calculation)
+  # @favorites = current_user.favorites.includes(:calculation).where("calculations.user_id = ? AND users.is_deleted = ?", @calculation.user_id, false)
   render :index
 end
 

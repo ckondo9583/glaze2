@@ -1,5 +1,6 @@
 class Public::HomesController < ApplicationController
   def top
+    @calculation = Calculation.first
   end
 
   def calculate

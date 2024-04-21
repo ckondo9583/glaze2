@@ -39,9 +39,11 @@ Rails.application.routes.draw do
     resources :homes ,only:[:top,:about]
     resources :users, only: [:show, :edit, :update]
     resources :calculations, only: [:new, :index, :show, :edit, :update, :create, :destroy] do
+    get :search, on: :collection
     resources :comments, only:[:create, :destroy]
     resources :favorites, only: [:index ,:create, :destroy]
     end
+
 
 
     get '/', to: 'homes#top' , as: 'user_top'

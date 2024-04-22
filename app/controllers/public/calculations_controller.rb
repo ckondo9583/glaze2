@@ -61,8 +61,9 @@ class Public::CalculationsController < ApplicationController
   def search
   keyword = params[:keyword]
   @calculations = Calculation.joins(:user)
-                             .where('user_id = ? OR temperature = ? OR tag_id = ? OR memo LIKE ? OR title LIKE ? OR subtitle LIKE ? OR burning_date = ? OR additive1 LIKE ? OR additive2 LIKE ? OR additive3 LIKE ? OR additive4 LIKE ? OR additive5 LIKE ?',
-                                   keyword, keyword, keyword, "%#{keyword}%", "%#{keyword}%", "%#{keyword}%", keyword, "%#{keyword}%", "%#{keyword}%", "%#{keyword}%", "%#{keyword}%", "%#{keyword}%")
+                             .joins(:tags)
+                             .where('release_status = 1 AND users.is_deleted = ? AND (temperature = ? OR tag_name = ? OR memo LIKE ? OR title LIKE ? OR subtitle LIKE ? OR burning_date = ? OR additive1 LIKE ? OR additive2 LIKE ? OR additive3 LIKE ? OR additive4 LIKE ? OR additive5 LIKE ? )',
+                                 false, keyword, keyword, "%#{keyword}%", "%#{keyword}%", "%#{keyword}%", keyword, "%#{keyword}%", "%#{keyword}%", "%#{keyword}%", "%#{keyword}%", "%#{keyword}%")
   render :index
   end
 
@@ -74,13 +75,12 @@ class Public::CalculationsController < ApplicationController
 
   def update
     @calculation = Calculation.find(params[:id])
-    if @calculation.update(calculation_params)
-      redirect_to calculation_path(@calculation)
-    else
-      render :edit
-    end
+   if @calculation.update(calculation_params)
+     redirect_to calculation_path(@calculation)
+   else
+     render :edit
+   end
   end
-
 
   def destroy
     @calculation = Calculation.find(params[:id])

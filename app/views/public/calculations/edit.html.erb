@@ -2,6 +2,7 @@
 <p>Find me in app/views/public/calculations/edit.html.erb</p>
 
 <%= form_with model: @calculation, url: calculation_path(@calculation), method: :patch do |f| %>
+
   <%= f.label :title, "タイトル" %>
   <%= f.text_field :title %>
 

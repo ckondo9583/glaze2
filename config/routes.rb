@@ -32,19 +32,17 @@ Rails.application.routes.draw do
 
 
  scope module: :public do
-   get '/users/unsubscribe', to: 'users#unsubscribe', as: 'users_unsubscribe'
+    get '/users/unsubscribe', to: 'users#unsubscribe', as: 'users_unsubscribe'
     # patch 'users/:id' ,to: 'users#update', as: 'users_update'
     patch '/users/withdraw', to: 'users#withdraw', as: 'users_withdraw'
 
     resources :homes ,only:[:top,:about]
     resources :users, only: [:show, :edit, :update]
-    resources :calculations, only: [:new, :index, :show, :edit, :update, :create, :destroy] do
+    resources :calculations, only: [:index, :show, :new, :create, :edit, :update, :destroy] do
     get :search, on: :collection
-    resources :comments, only:[:create, :destroy]
-    resources :favorites, only: [:index ,:create, :destroy]
+    resources :comments, only: [:create, :destroy]
+    resources :favorites, only: [:index, :create, :destroy]
     end
-
-
 
     get '/', to: 'homes#top' , as: 'user_top'
     get '/about', to: 'homes#about' , as: 'user_about'

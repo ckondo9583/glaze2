@@ -13,5 +13,5 @@
 <% end %>
 
 <% @tags.each do |tag| %>
-      <%= tag.tag_name %>
-<% end %>
+<li> <%= tag.tag_name %> <%= link_to '編集', edit_admin_tag_path(tag) %><%= link_to '削除', admin_tag_path(tag), method: :delete, data: { confirm: '本当に削除しますか？' } %>
+</li> <% end %>

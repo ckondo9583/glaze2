@@ -24,11 +24,25 @@ end
 
 
   def edit
+    @calculation = Calculation.first
+    @tag = Tag.find(params[:id])
+  end
+  
+  def update
+    @tag = Tag.find(params[:id])
+    if @tag.update(tag_params)
+     redirect_to admin_tags_path, notice: 'タグが更新されました'
+    else
+     flash.now[:alert] = 'タグの更新に失敗しました'
+     render :edit
+   end
   end
 
   def destroy
+    @calculation = Calculation.first
     @tag = Tag.find(params[:id])
     @tag.destroy
+    redirect_to admin_tags_path, notice: 'タグが削除されました'
   end
 
   private

@@ -1,6 +1,6 @@
 class Public::CalculationsController < ApplicationController
  before_action :authenticate_user!
-
+ before_action :validate_amount, only: [:new]
 
   def new
    @amount = session[:amount]
@@ -96,6 +96,14 @@ class Public::CalculationsController < ApplicationController
   params.require(:calculation).permit(:release_status,:fukushimafeldspar,:lithiumcarbonate,:magnesite,:whitelimestone,:strontiumcarbonate,:bariumcarbonate,:zincoxide,:kaolin,:fukushimasilica, :title, :subtitle,:additive1,:additive2,:additive3,:additive4,:additive5,:memo,:tag_id,:tag_ids,:temperature,:image,:additive1_amount,:additive2_amount,:additive3_amount,:additive4_amount,:additive5_amount,:burning_date,:memo,favorites_attributes: [:id, :user_id, :_destroy])
   end
 
+def validate_amount
+  if params[:amount].to_f < 0
+    flash[:alert] = "調合量がマイナスです。正しい値を入力してください。"
+    redirect_to user_top_path
+  elsif [@fukushimafeldspar, @lithiumcarbonate, @magnesite, @whitelimestone, @strontiumcarbonate, @bariumcarbonate, @zincoxide, @kaolin, @fukushimasilica]
+        .any? { |value| value.present? && (value.to_f < 0) }
+    flash[:alert] = "マイナスの値が含まれています。正しい値を入力してください。"
+    redirect_to user_top_path
+  end
 end
-
-
+end

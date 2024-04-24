@@ -2,66 +2,79 @@
 <html>
   <head>
     <title>Glaze</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+    
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="<%=url_for(user_top_path)%>">Glaze</a>
-  </div>
-</nav>
-
-      <header>
-    <% if user_signed_in? %>
-      <li>
-        <%= link_to "計算ページ", user_top_path %>
-      </li>
-      <li>
-        <%= link_to "みんなの配合", calculations_path %>
-      </li>
-      <li>
-        <%= link_to "マイページ", user_path(current_user) %>
-      </li>
-      <li>
-        <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
-      </li>
+    <script src="https://kit.fontawesome.com/92bef9f57d.js" crossorigin="anonymous"></script>
+  <header>
+  <!--ここから修正後のコード-->
+  
+  
+  <nav class="navbar navbar-expand-lg navbar-light bg-info">
+    <div class="container-fluid">
+      <a class="navbar-brand text-light" href="<%=url_for(user_top_path)%>">Glaze</a>
       
-    <% elsif admin_signed_in? %>
-      <li>
-        <%= link_to "計算一覧", admin_calculations_path %>
-      </li>
-      <li>
-        <%= link_to "タグ一覧", admin_tags_index_path %>
-      </li>
-      <li>
-        <%= link_to "ユーザー一覧", admin_users_path %>
-      </li>
-      <li>
-        <%= link_to "コメント一覧",  admin_calculation_comments_path(@calculation.id) %>
-      </li>
-      <li>
-        <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
-      </li>
-    
-    
-    <% else %>
-      <li>
-        <%= link_to "新規登録", new_user_registration_path %>
-      </li>
-      <li>
-        <%= link_to "ログイン", new_user_session_path %>
-      </li>
-      <li>
-      <%= link_to 'ゲストログイン（閲覧用）', users_guest_sign_in_path, method: :post %>
+      <button class="navbar-toggler text-light" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="fas fa-bars"></span>
+      </button>
+  
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+      
+      <% if user_signed_in? %>
+        <li class="nav-item">
+          <%= link_to "計算ページ", user_top_path, class: "nav-link text-light" %>
         </li>
-    <% end %>
+        <li class="nav-item">
+          <%= link_to "みんなの配合", calculations_path, class: "nav-link text-light" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "マイページ", user_path(current_user), class: "nav-link text-light" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "nav-link text-light" %>
+        </li>
+      
+      <% elsif admin_signed_in? %>
+        <li class="nav-item">
+          <%= link_to "計算一覧", admin_calculations_path, class: "nav-link text-light" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "タグ一覧", admin_tags_index_path, class: "nav-link text-light" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "ユーザー一覧", admin_users_path, class: "nav-link text-light" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "コメント一覧",  admin_calculation_comments_path(@calculation.id), class: "nav-link text-light" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "nav-link text-light" %>
+        </li>
+      
+      <% else %>
+        <li class="nav-item">
+          <%= link_to "新規登録", new_user_registration_path, class: "nav-link text-light" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "ログイン", new_user_session_path, class: "nav-link text-light" %>
+        </li>
+        <li class="nav-item">
+        <%= link_to 'ゲストログイン（閲覧用）', users_guest_sign_in_path, method: :post, class: "nav-link text-light" %>
+        </li>
+      <% end %>
+      
+        </ul>
+      </div>
+    </div>
+  </nav>
   </header>
 
     <%= yield %>

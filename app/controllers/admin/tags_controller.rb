@@ -35,7 +35,7 @@ end
     else
      flash.now[:alert] = 'タグの更新に失敗しました'
      render :edit
-   end
+    end
   end
 
   def destroy

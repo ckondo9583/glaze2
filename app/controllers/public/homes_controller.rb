@@ -1,4 +1,7 @@
 class Public::HomesController < ApplicationController
+  before_action :validate_amount, only: [:calculate]
+  
+  
   def top
     @calculation = Calculation.first
   end
@@ -36,10 +39,23 @@ class Public::HomesController < ApplicationController
     session[:zincoxide] = @zincoxide = @zno_result / @total * @amount
     session[:kaolin] = @kaolin = @al2o3_result / @total * @amount
     session[:fukushimasilica] = @fukushimasilica = @sio2_result / @total * @amount
-
+    
     render 'top'
+    
+    
   end
 
   def about
   end
+  
+  private
+
+  def validate_amount
+    unless params[:amount].present? && params[:amount].to_f > 0
+      # エラーメッセージを設定
+      flash[:alert] = "正しい数値を入力してください"
+      redirect_to user_top_path
+    end
+  end
+  
 end

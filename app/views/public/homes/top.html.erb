@@ -1,92 +1,142 @@
-<h1>Public::Homes#top</h1>
-<p>Find me in app/views/public/homes/top.html.erb</p>
-<h3>ここに計算機能を作る</h3>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
 
-<% flash.each do |key, message| %>
-  <div class="flash-<%= key %>">
-    <%= message %>
+
+<h2>ゼーゲル式から材料の調合割合を求めます。</h2>
+     <% flash.each do |key, message| %>
+      <div class="alert alert-danger font-weight-bold">
+        <%= message %>
+      </div>
+        <% end %>
+     
+      <p>ゼーゲル式を入力してください。</p>
+
+<%= form_tag(calculate_path) do %>
+ <table class="table table-striped table-hover">
+  <tr>
+    <th style="text-align: right;"><%= label_tag :kano, "KNaO" %></th>
+    <td><%= text_field_tag :kano %></td>
+  </tr>
+  <tr>
+    <th style="text-align: right;"><%= label_tag :li2o, "Li2O" %></th>
+    <td><%= text_field_tag :li2o %></td>
+  </tr>
+  <tr>
+    <th style="text-align: right;"><%= label_tag :mgo, "MgO" %></th>
+    <td><%= text_field_tag :mgo %></td>
+  </tr>
+  <tr>
+    <th style="text-align: right;"><%= label_tag :cao, "CaO" %></th>
+    <td><%= text_field_tag :cao %></td>
+  </tr>
+  <tr>
+    <th style="text-align: right;"><%= label_tag :sro, "SrO" %></th>
+    <td><%= text_field_tag :sro %></td>
+  </tr>
+  <tr>
+    <th style="text-align: right;"><%= label_tag :bao, "BaO" %></th>
+    <td><%= text_field_tag :bao %></td>
+  </tr>
+  <tr>
+    <th style="text-align: right;"><%= label_tag :zno, "ZnO" %></th>
+    <td><%= text_field_tag :zno %></td>
+  </tr>
+  <tr class="table-active">
+  <th style="text-align: right;"><%= label_tag :al2o3, "Al2O3" %></th>
+  <td><%= text_field_tag :al2o3 %></td>
+</tr>
+<tr class="table-active">
+  <th style="text-align: right;"><%= label_tag :sio2, "SiO2" %></th>
+  <td><%= text_field_tag :sio2 %></td>
+</tr>
+  <tr>
+    <th style="text-align: right;"><%= label_tag :amount, "調合量（g）" %></th>
+    <td><%= text_field_tag :amount %></td>
+  </tr>
+</table>
+ <div style="text-align: center;">
+    <%= submit_tag "計算する", class: "btn btn-info" %>
   </div>
 <% end %>
 
-<%= form_tag(calculate_path) do %>
-  <%= label_tag :kano, "kanoの値を入力してください：" %>
-  <%= text_field_tag :kano %>
+<table class="table table-info table-striped table-hover">
+  <% if @total %>
+    <tr>
+      <th style="text-align: right;">調合量</th>
+      <td style="text-align: right;"><%= sprintf("%.1f", @total) %>(g)</td>
+    </tr>
+  <% end %>
 
-  <%= label_tag :li2o, "li2oの値を入力してください：" %>
-  <%= text_field_tag :li2o %>
+  <% if @fukushimafeldspar %>
+    <tr>
+      <th style="text-align: right;">長石</th>
+      <td style="text-align: right;"><%= sprintf("%.1f", @fukushimafeldspar) %>(g)</td>
+    </tr>
+  <% end %>
 
-  <%= label_tag :mgo, "mgoの値を入力してください：" %>
-  <%= text_field_tag :mgo %>
+  <% if @lithiumcarbonate %>
+    <tr>
+      <th style="text-align: right;">炭酸リチウム</th>
+      <td style="text-align: right;"><%= sprintf("%.1f", @lithiumcarbonate) %>(g)</td>
+    </tr>
+  <% end %>
 
-  <%= label_tag :cao, "caoの値を入力してください：" %>
-  <%= text_field_tag :cao %>
+  <% if @magnesite %>
+    <tr>
+      <th style="text-align: right;">マグネサイト</th>
+      <td style="text-align: right;"><%= sprintf("%.1f", @magnesite) %>(g)</td>
+    </tr>
+  <% end %>
 
-  <%= label_tag :sro, "sroの値を入力してください：" %>
-  <%= text_field_tag :sro %>
+  <% if @whitelimestone %>
+    <tr>
+      <th style="text-align: right;">白石石灰</th>
+      <td style="text-align: right;"><%= sprintf("%.1f", @whitelimestone) %>(g)</td>
+    </tr>
+  <% end %>
 
-  <%= label_tag :bao, "baoの値を入力してください：" %>
-  <%= text_field_tag :bao %>
+  <% if @strontiumcarbonate %>
+    <tr>
+      <th style="text-align: right;">炭酸ストロンチウム</th>
+      <td style="text-align: right;"><%= sprintf("%.1f", @strontiumcarbonate) %>(g)</td>
+    </tr>
+  <% end %>
 
-  <%= label_tag :zno, "znoの値を入力してください：" %>
-  <%= text_field_tag :zno %>
+  <% if @bariumcarbonate %>
+    <tr>
+      <th style="text-align: right;">炭酸バリウム</th>
+      <td style="text-align: right;"><%= sprintf("%.1f", @bariumcarbonate) %>(g)</td>
+    </tr>
+  <% end %>
 
-  <%= label_tag :al2o3, "al2o3の値を入力してください：" %>
-  <%= text_field_tag :al2o3 %>
+  <% if  @zincoxide %>
+    <tr>
+      <th style="text-align: right;">亜鉛華</th>
+      <td style="text-align: right;"><%= sprintf("%.1f", @zincoxide) %>(g)</td>
+    </tr>
+  <% end %>
 
-  <%= label_tag :sio2, "sio2の値を入力してください：" %>
-  <%= text_field_tag :sio2 %>
+  <% if @kaolin %>
+    <tr>
+      <th style="text-align: right;">韓国カオリン</th>
+      <td style="text-align: right;"><%= sprintf("%.1f", @kaolin) %>(g)</td>
+    </tr>
+  <% end %>
 
-  <%= label_tag :amount, "何g調合にしますか：" %>
-  <%= text_field_tag :amount %>
+  <% if @fukushimasilica %>
+    <tr>
+      <th style="text-align: right;">福島珪石</th>
+      <td style="text-align: right;"><%= sprintf("%.1f", @fukushimasilica) %>(g)</td>
+    </tr>
+  <% end %>
+</table>
+ <div style="text-align: center;">
+        <% if @total %>
+          <%= link_to "保存する", new_calculation_url, class: "btn btn-info" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
 
-
-
-  
-
-  <%= submit_tag "計算する" %>
-<% end %>
-
-<% if @total %>
-  <p>合計の計算結果： <%= @total %></p>
-<% end %>
-
-<% if @fukushimafeldspar %>
-  <p>福島長石の計算結果： <%= @fukushimafeldspar %></p>
-<% end %>
-
-<% if @lithiumcarbonate %>
-  <p>炭酸リチウムの計算結果： <%= @lithiumcarbonate %></p>
-<% end %>
-
-<% if @magnesite %>
-  <p>マグネサイト</p>の計算結果： <%= @magnesite %></p>
-<% end %>
-
-<% if @whitelimestone %>
-  <p>白石石灰の計算結果： <%= @whitelimestone %></p>
-<% end %>
-
-<% if @strontiumcarbonate %>
-  <p>炭酸ストロンチウムの計算結果： <%= @strontiumcarbonate %></p>
-<% end %>
-
-<% if @bariumcarbonate %>
-  <p>炭酸バリウムの計算結果： <%= @bao_result %></p>
-<% end %>
-
-<% if  @zincoxide %>
-  <p>亜鉛華の計算結果： <%=  @zincoxide %></p>
-<% end %>
-
-<% if @kaolin %>
-  <p>韓国カオリンの計算結果： <%= @kaolin %></p>
-<% end %>
-
-<% if @fukushimasilica %>
-  <p>福島珪石の計算結果： <%= @fukushimasilica %></p>
-<% end %>
-
-
- <%= link_to "保存する", new_calculation_url %>
-
-<!-- 他の計算結果についても同様に表示 -->

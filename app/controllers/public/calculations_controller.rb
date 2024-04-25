@@ -13,6 +13,7 @@ class Public::CalculationsController < ApplicationController
    @zincoxide =  session[:zincoxide]
    @kaolin =  session[:kaolin]
    @fukushimasilica =  session[:fukushimasilica]
+   validate_amount
    @calculation = Calculation.new
   end
 
@@ -97,13 +98,11 @@ class Public::CalculationsController < ApplicationController
   end
 
 def validate_amount
-  if params[:amount].to_f < 0
-    flash[:alert] = "調合量がマイナスです。正しい値を入力してください。"
-    redirect_to user_top_path
-  elsif [@fukushimafeldspar, @lithiumcarbonate, @magnesite, @whitelimestone, @strontiumcarbonate, @bariumcarbonate, @zincoxide, @kaolin, @fukushimasilica]
-        .any? { |value| value.present? && (value.to_f < 0) }
-    flash[:alert] = "マイナスの値が含まれています。正しい値を入力してください。"
-    redirect_to user_top_path
+  amounts = [@fukushimafeldspar, @lithiumcarbonate, @magnesite, @whitelimestone, @strontiumcarbonate, @bariumcarbonate, @zincoxide, @kaolin, @fukushimasilica]
+  if amounts.any? { |value| value.present? && (value.to_f < 0) }
+    flash[:alert] = "調合量にマイナスの値が含まれています。正しい値を入力してください。"
+    redirect_to user_top_path and return
   end
 end
+
 end

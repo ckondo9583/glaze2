@@ -9,7 +9,7 @@
         <%= message %>
       </div>
         <% end %>
-     
+
       <p>ゼーゲル式を入力してください。</p>
 
 <%= form_tag(calculate_path) do %>
@@ -68,74 +68,52 @@
     </tr>
   <% end %>
 
-  <% if @fukushimafeldspar %>
-    <tr>
-      <th style="text-align: right;">長石</th>
-      <td style="text-align: right;"><%= sprintf("%.1f", @fukushimafeldspar) %>(g)</td>
-    </tr>
-  <% end %>
+  <% materials = [
+    { name: "長石", value: @fukushimafeldspar },
+    { name: "炭酸リチウム", value: @lithiumcarbonate },
+    { name: "マグネサイト", value: @magnesite },
+    { name: "白石石灰", value: @whitelimestone },
+    { name: "炭酸ストロンチウム", value: @strontiumcarbonate },
+    { name: "炭酸バリウム", value: @bariumcarbonate },
+    { name: "亜鉛華", value: @zincoxide },
+    { name: "韓国カオリン", value: @kaolin },
+    { name: "福島珪石", value: @fukushimasilica }
+  ] %>
 
-  <% if @lithiumcarbonate %>
+<% materials.each do |material| %>
+  <% if material[:value] && material[:value] < 0 %>
+    <% @has_negative_value = true %>
+    <tr class="table-danger">
+      <th style="text-align: right;">
+        <%= material[:name] %>
+      </th>
+      <td style="text-align: right; color: red;">
+        <%= sprintf("%.1f", material[:value]) %>(g)
+      </td>
+    </tr>
+  <% elsif material[:value] %>
     <tr>
-      <th style="text-align: right;">炭酸リチウム</th>
-      <td style="text-align: right;"><%= sprintf("%.1f", @lithiumcarbonate) %>(g)</td>
+      <th style="text-align: right;">
+        <%= material[:name] %>
+      </th>
+      <td style="text-align: right;">
+        <%= sprintf("%.1f", material[:value]) %>(g)
+      </td>
     </tr>
   <% end %>
+<% end %>
 
-  <% if @magnesite %>
-    <tr>
-      <th style="text-align: right;">マグネサイト</th>
-      <td style="text-align: right;"><%= sprintf("%.1f", @magnesite) %>(g)</td>
-    </tr>
-  <% end %>
+<% if @has_negative_value %>
+  <strong style="color: red;">マイナスの値があります。計算し直してください。</strong>
+<% end %>
 
-  <% if @whitelimestone %>
-    <tr>
-      <th style="text-align: right;">白石石灰</th>
-      <td style="text-align: right;"><%= sprintf("%.1f", @whitelimestone) %>(g)</td>
-    </tr>
-  <% end %>
-
-  <% if @strontiumcarbonate %>
-    <tr>
-      <th style="text-align: right;">炭酸ストロンチウム</th>
-      <td style="text-align: right;"><%= sprintf("%.1f", @strontiumcarbonate) %>(g)</td>
-    </tr>
-  <% end %>
-
-  <% if @bariumcarbonate %>
-    <tr>
-      <th style="text-align: right;">炭酸バリウム</th>
-      <td style="text-align: right;"><%= sprintf("%.1f", @bariumcarbonate) %>(g)</td>
-    </tr>
-  <% end %>
-
-  <% if  @zincoxide %>
-    <tr>
-      <th style="text-align: right;">亜鉛華</th>
-      <td style="text-align: right;"><%= sprintf("%.1f", @zincoxide) %>(g)</td>
-    </tr>
-  <% end %>
-
-  <% if @kaolin %>
-    <tr>
-      <th style="text-align: right;">韓国カオリン</th>
-      <td style="text-align: right;"><%= sprintf("%.1f", @kaolin) %>(g)</td>
-    </tr>
-  <% end %>
-
-  <% if @fukushimasilica %>
-    <tr>
-      <th style="text-align: right;">福島珪石</th>
-      <td style="text-align: right;"><%= sprintf("%.1f", @fukushimasilica) %>(g)</td>
-    </tr>
-  <% end %>
 </table>
- <div style="text-align: center;">
-        <% if @total %>
-          <%= link_to "保存する", new_calculation_url, class: "btn btn-info" %>
-        <% end %>
-      </div>
+
+<div style="text-align: center;">
+  <% if @total %>
+    <%= link_to "保存する", new_calculation_url, class: "btn btn-info" %>
+  <% end %>
+</div>
     </div>
   </div>
 </div>

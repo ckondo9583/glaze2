@@ -93,14 +93,14 @@ class Public::CalculationsController < ApplicationController
 
   private
 
-  def calculation_params
-  params.require(:calculation).permit(:release_status,:fukushimafeldspar,:lithiumcarbonate,:magnesite,:whitelimestone,:strontiumcarbonate,:bariumcarbonate,:zincoxide,:kaolin,:fukushimasilica, :title, :subtitle,:additive1,:additive2,:additive3,:additive4,:additive5,:memo,:tag_id,:tag_ids,:temperature,:image,:additive1_amount,:additive2_amount,:additive3_amount,:additive4_amount,:additive5_amount,:burning_date,:memo,favorites_attributes: [:id, :user_id, :_destroy])
-  end
+ def calculation_params
+  params.require(:calculation).permit(:release_status, :fukushimafeldspar, :lithiumcarbonate, :magnesite, :whitelimestone, :strontiumcarbonate, :bariumcarbonate, :zincoxide, :kaolin, :fukushimasilica, :title, :subtitle, :additive1, :additive2, :additive3, :additive4, :additive5, :memo, :tag_id, :temperature, :image, :additive1_amount, :additive2_amount, :additive3_amount, :additive4_amount, :additive5_amount, :burning_date, :memo, favorites_attributes: [:id, :user_id, :_destroy], tag_ids: [])
+ end
 
 def validate_amount
   amounts = [@fukushimafeldspar, @lithiumcarbonate, @magnesite, @whitelimestone, @strontiumcarbonate, @bariumcarbonate, @zincoxide, @kaolin, @fukushimasilica]
-  if amounts.any? { |value| value.present? && (value.to_f < 0) }
-    flash[:alert] = "調合量にマイナスの値が含まれています。正しい値を入力してください。"
+  if amounts.any? { |value| value.present? && (value.to_f < -10) }
+    flash[:alert] = "調合量に10g以上の値が含まれています。計算結果をやりなおしてください。"
     redirect_to user_top_path and return
   end
 end

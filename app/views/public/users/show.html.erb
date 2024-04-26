@@ -1,29 +1,63 @@
-<h1>Public::Users#show</h1>
-<p>Find me in app/views/public/users/show.html.erb</p>
+<div class="container">
+  <div class="container">
+  <div class="text-center">
+ <h3 style="background-color: #17a2b8; color: white; font-weight: bold; padding: 5px;">マイページ</h3>
+    <table class="table">
+      <tbody>
+        <tr>
+          <th>名    前</th>
+          <td><%= @user.name %></td>
+        </tr>
+        <tr>
+          <th>自己紹介</th>
+          <td><%= @user.introduction %></td>
+        </tr>
+          <% if @user == current_user && @user.name != "guestuser" %>
+          <tr>
+            <td class="text-right" colspan="2">
+              <%= link_to "編集", edit_user_path(@user), class: 'btn btn-primary' %>
+              <%= link_to "退会する", users_unsubscribe_path(@user.id), method: :get, class: 'btn btn-danger' %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
 
 
-<h4><%= @user.name %></h4>
-<% if @user == current_user && @user.name != "guestuser" %>
-  <%= link_to "編集", edit_user_path(@user), class: 'editbtn' %>
-  <%= link_to "退会する", users_unsubscribe_path(@user.id), method: :get, class: 'editbtn' %>
-<% end %>
-<p><%= @user.introduction %></p>
-
-<h3>投稿一覧</h3>
-<% @calculations.each do |calculation| %>
-  <p><%= link_to calculation.title, calculation %></p>
-  <p><%= calculation.subtitle %></p>
-<% end %>
-
-<h3>いいねした投稿一覧</h3>
-
-<% @favorites.each do |favorite| %>
-
-  <p>タイトル: <%= link_to favorite.calculation.title ,calculation_path(favorite.calculation)  %></p>
-
-  <p>投稿者: <%= link_to favorite.calculation.user.name , user_path(favorite.calculation.user) %></p>
-
-<% end %>
-
-
-<%= link_to "いいね一覧", calculation_favorites_path(@calculation.id) %>
+ <h3 style="background-color: #17a2b8; color: white; font-weight: bold; padding: 5px;">投稿一覧</h3>
+ <table class="table">
+  <thead>
+    <tr>
+      <th>タイトル</th>
+      <th>サブタイトル</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @calculations.each do |calculation| %>
+      <tr>
+        <td><%= link_to calculation.title, calculation %></td>
+        <td><%= calculation.subtitle %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<h3 style="background-color: #17a2b8; color: white; font-weight: bold; padding: 5px;">お気に入り投稿</h3>
+<table class="table">
+  <thead>
+    <tr>
+      <th>タイトル</th>
+      <th>投稿者</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @favorites.each do |favorite| %>
+      <tr>
+        <td><%= link_to favorite.calculation.title, calculation_path(favorite.calculation) %></td>
+        <td><%= link_to favorite.calculation.user.name, user_path(favorite.calculation.user) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+    <%= link_to "いいね一覧", calculation_favorites_path(@calculation.id) %>
+  </div>
+</div>

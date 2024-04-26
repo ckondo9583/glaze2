@@ -2,19 +2,13 @@
   <div class="row justify-content-center">
     <div class="col-md-８">
 
-
-<h1>Public::Calculations#new</h1>
-<p>Find me in app/views/public/calculations/new.html.erb</p>
-
-<h1>投稿（保存）ページ</h1>
 <%= flash.now[:error] %>
-
  <div class="field">
 <% if @calculation.errors.has_key?(:title) %>
   <p>タイトルを入力してください</p>
 <% end %>
 　</div>
-
+<h3 class="font-weight-bold">計算結果を保存</h3>
 <%= form_with(model: @calculation, url: calculations_path, local: true) do |f| %>
      <table class="table table-striped table-hover">
       <tr>
@@ -123,7 +117,8 @@
    </tr>
  <tr>
      <th style="text-align: right;"> タグ</th>
-      <td class="text-center"><%= f.collection_check_boxes :tag_ids, Tag.all, :id, :tag_name do |b| %><%= b.label { b.check_box + b.text } %>
+      <td class="text-center"><%= f.collection_check_boxes :tag_ids, Tag.all, :id, :tag_name do |b| %>
+      <%= b.label { b.check_box + b.text } %>
       <% end %></td>
 </tr>
 <tr>

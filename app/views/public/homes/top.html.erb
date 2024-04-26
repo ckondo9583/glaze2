@@ -3,7 +3,7 @@
     <div class="col-md-6">
 
 
-<h2>ゼーゲル式から材料の調合割合を求めます。</h2>
+<strong style="color: blue;">ゼーゲル式から材料の調合割合を求めます。</strong>
      <% flash.each do |key, message| %>
       <div class="alert alert-danger font-weight-bold">
         <%= message %>
@@ -42,6 +42,8 @@
     <th style="text-align: right;"><%= label_tag :zno, "ZnO" %></th>
     <td><%= text_field_tag :zno %></td>
   </tr>
+</table>
+<table class="table table-striped table-hover">
   <tr class="table-active">
   <th style="text-align: right;"><%= label_tag :al2o3, "Al2O3" %></th>
   <td><%= text_field_tag :al2o3 %></td>
@@ -50,6 +52,8 @@
   <th style="text-align: right;"><%= label_tag :sio2, "SiO2" %></th>
   <td><%= text_field_tag :sio2 %></td>
 </tr>
+</table>
+<table class="table table-striped table-hover">
   <tr>
     <th style="text-align: right;"><%= label_tag :amount, "調合量（g）" %></th>
     <td><%= text_field_tag :amount %></td>
@@ -61,13 +65,6 @@
 <% end %>
 
 <table class="table table-info table-striped table-hover">
-  <% if @total %>
-    <tr>
-      <th style="text-align: right;">調合量</th>
-      <td style="text-align: right;"><%= sprintf("%.1f", @total) %>(g)</td>
-    </tr>
-  <% end %>
-
   <% materials = [
     { name: "長石", value: @fukushimafeldspar },
     { name: "炭酸リチウム", value: @lithiumcarbonate },
@@ -104,9 +101,19 @@
 <% end %>
 
 <% if @has_negative_value %>
-  <strong style="color: red;">マイナスの値があります。計算し直してください。</strong>
+  <strong style="color: red;">計算結果にマイナスの値があります。保存してもよろしいですか。</strong>
+  <p style="color: red;">10以上のマイナス値が含まれると保存できません。</p>
 <% end %>
 
+</table>
+
+<table class="table table-info table-striped table-hover">
+ <% if @total %>
+    <tr>
+      <th style="text-align: right;">調合量</th>
+      <td style="text-align: right;"><%= sprintf("%.1f", @total) %>(g)</td>
+    </tr>
+  <% end %>
 </table>
 
 <div style="text-align: center;">

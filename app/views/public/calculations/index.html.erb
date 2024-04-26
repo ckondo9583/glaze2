@@ -1,13 +1,29 @@
-<h1>Public::Calculations#index</h1>
-<p>Find me in app/views/public/calculations/index.html.erb</p>
+<div class="container">
+  <div class="text-center">
+    <%= form_tag search_calculations_path, method: :get, class: 'text-center' do %>
+      <div class="form-group d-inline-flex">
+        <%= text_field_tag :keyword, params[:keyword], class: 'form-control' %>
+        <%= submit_tag '検索', class: 'btn btn-success ml-2' %>
+      </div>
+    <% end %>
 
-<%= form_tag search_calculations_path, method: :get do %>
-  <%= text_field_tag :keyword, params[:keyword] %>
-  <%= submit_tag '検索' %>
-<% end %>
-
-<% @calculations.each do |calculation| %>
-  <h3><%= link_to calculation.title ,calculation  %></h3>
-  <h4><%= calculation.subtitle %></h4>
-  <p><%= link_to calculation.user.name , user_path(calculation.user) %></p>
-<% end %>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>タイトル</th>
+          <th>サブタイトル</th>
+          <th>投稿者</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @calculations.each do |calculation| %>
+          <tr>
+            <td><%= link_to calculation.title, calculation %></td>
+            <td><%= calculation.subtitle %></td>
+            <td><%= link_to calculation.user.name, user_path(calculation.user) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

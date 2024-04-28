@@ -1,69 +1,113 @@
-<h1>Public::Calculations#edit</h1>
-<p>Find me in app/views/public/calculations/edit.html.erb</p>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-８">
+<h3 style="background-color: #17a2b8; color: white; font-weight: bold; padding: 5px;">投稿編集ページ</h3>
+
 
 <%= form_with model: @calculation, url: calculation_path(@calculation), method: :patch do |f| %>
 
-  <%= f.label :title, "タイトル" %>
-  <%= f.text_field :title %>
-
-  <%= f.label :subtitle, "サブタイトル" %>
-  <%= f.text_field :subtitle %>
-
-  <%= f.label :fukushimafeldspar, "福島長石" %>
-  <%= f.number_field :fukushimafeldspar, step: 0.1 %>
-
-  <%= f.label :lithiumcarbonate, "炭酸リチウム" %>
-  <%= f.number_field :lithiumcarbonate, step: 0.1 %>
-
-  <%= f.label :magnesite, "マグネサイト" %>
-  <%= f.number_field :magnesite, step: 0.1 %>
-
-  <%= f.label :whitelimestone, "白石石灰" %>
-  <%= f.number_field :whitelimestone, step: 0.1 %>
-
-  <%= f.label :strontiumcarbonate, "炭酸ストロンチウム" %>
-  <%= f.number_field :strontiumcarbonate, step: 0.1 %>
-
-  <%= f.label :bariumcarbonate, "炭酸バリウム" %>
-  <%= f.number_field :bariumcarbonate, step: 0.1 %>
-
-  <%= f.label :zincoxide, "亜鉛華" %>
-  <%= f.number_field :zincoxide, step: 0.1 %>
-
-  <%= f.label :kaolin, "カオリン" %>
-  <%= f.number_field :kaolin, step: 0.1 %>
-
-  <%= f.label :fukushimasilica, "福島珪石" %>
-  <%= f.number_field :fukushimasilica, step: 0.1 %>
-
+   <table class="table table-info  table-striped table-hover">
+  <tr>
+    <th style="text-align: right; width: 40%;"><%= f.label :title, "タイトル" %></th>
+    <td class="text-center"><%= f.text_field :title %></td>
+  </tr>
+  <tr>
+    <th style="text-align: right;"><%= f.label :subtitle, "サブタイトル" %></th>
+    <td class="text-center"><%= f.text_field :subtitle %></td>
+  </tr>
+  </table>
+  <table class="table table-striped table-hover">
+  <tr>
+    <th style="text-align: right;"><%= f.label :fukushimafeldspar, "福島長石" %></th>
+    <td class="text-center"><%= f.number_field :fukushimafeldspar, step: 0.1 %></td>
+ </tr>
+  <tr>
+    <th style="text-align: right;"><%= f.label :lithiumcarbonate, "炭酸リチウム" %></th>
+    <td class="text-center"><%= f.number_field :lithiumcarbonate, step: 0.1 %></td>
+ </tr>
+  <tr>
+    <th style="text-align: right;"><%= f.label :magnesite, "マグネサイト" %></th>
+    <td class="text-center"><%= f.number_field :magnesite, step: 0.1 %></td>
+  </tr>
+  <tr>
+   <th style="text-align: right;"><%= f.label :whitelimestone, "白石石灰" %></th>
+   <td class="text-center"><%= f.number_field :whitelimestone, step: 0.1 %></td>
+   </tr>
+  <tr>
+   <th style="text-align: right;"><%= f.label :strontiumcarbonate, "炭酸ストロンチウム" %></th>
+   <td class="text-center"><%= f.number_field :strontiumcarbonate, step: 0.1 %></td>
+   </tr>
+  <tr>
+    <th style="text-align: right;"><%= f.label :bariumcarbonate, "炭酸バリウム" %></th>
+    <td class="text-center"><%= f.number_field :bariumcarbonate, step: 0.1 %></td>
+  </tr>
+  <tr>
+   <th style="text-align: right;"><%= f.label :zincoxide, "亜鉛華" %></th>
+   <td class="text-center"><%= f.number_field :zincoxide, step: 0.1 %></td>
+  </tr>
+  <tr>
+   <th style="text-align: right;"><%= f.label :kaolin, "カオリン" %></th>
+   <td class="text-center"><%= f.number_field :kaolin, step: 0.1 %></td>
+  </tr>
+  <tr>
+   <th style="text-align: right;"><%= f.label :fukushimasilica, "福島珪石" %></th>
+   <td class="text-center"><%= f.number_field :fukushimasilica, step: 0.1 %></td>
+  </tr>
+  <tr>
   <% (1..5).each do |i| %>
     <% additive_column = "additive#{i}" %>
     <% additive_amount = "additive#{i}_amount" %>
-    <% if @calculation.send(additive_column).present? %>
-      <%= f.label @calculation.send(additive_column), @calculation.send(additive_column) %>
-      <%= f.number_field @calculation.send(additive_amount), step: 0.1 %>
-    <% end %>
+    <th style="text-align: right;">
+      <%= f.label additive_column, "添加物#{i}" %>
+    </th>
+    <td class="text-center">
+      <%= f.text_field additive_column, value: @calculation.send(additive_column) %>
+    </td>
+  </tr>
+  <tr>
+    <th style="text-align: right;">
+      <%= f.label additive_amount, "添加物#{i}配合量(g)" %>
+    </th>
+    <td class="text-center">
+      <%= f.text_field additive_amount, value: @calculation.send(additive_amount) %>
+    </td>
+  </tr>
   <% end %>
-
-  <%= f.label :image, "画像" %>
-  <%= f.file_field :image %>
-
-  <%= f.label :memo, "メモ" %>
-  <%= f.text_area :memo %>
-
-  <%= f.label :temperature, "焼成温度" %>
-  <%= f.number_field :temperature %>
-
-  <%= f.label :burning_date, "焼成日時" %>
-  <%= f.datetime_select :burning_date %>
-
-  <%= f.label :tag_ids, "タグ" %>
-  <%= f.collection_check_boxes :tag_ids, Tag.all, :id, :tag_name do |b| %>
+  <tr>
+   <th style="text-align: right;"><%= f.label :image, "画像" %></th>
+   <td class="text-center"><%= f.file_field :image %></td>
+  </tr>
+  <tr>
+   <th style="text-align: right;"><%= f.label :memo, "メモ" %></th>
+   <td class="text-center"><%= f.text_area :memo %></td>
+ </tr>
+  <tr>
+   <th style="text-align: right;"><%= f.label :temperature, "焼成温度" %></th>
+   <td class="text-center"><%= f.number_field :temperature %></td>
+ </tr>
+  <tr>
+   <th style="text-align: right;"><%= f.label :burning_date, "焼成日時" %></th>
+   <td class="text-center"> <%= f.datetime_select :burning_date %></td>
+ </tr>
+  <tr>
+   <th style="text-align: right;"><%= f.label :tag_ids, "タグ" %></th>
+   <td class="text-center"><%= f.collection_check_boxes :tag_ids, Tag.all, :id, :tag_name do |b| %>
   <%= b.label { b.check_box + b.text } %>
-  <% end %>
-
-  <%= f.label :release_status, "公開ステータス" %>
-  <%= f.select :release_status, Calculation.release_statuses.keys.map { |status| [I18n.t("activerecord.enums.calculation.release_status.#{status}"), status] } %>
-
-  <%= f.submit "更新する" %>
+  <% end %></td>
+ </tr>
+ <tr>
+  <th style="text-align: right;">公開設定</th>
+  <td class="text-center">
+    <%= f.radio_button :release_status, "confine" %>
+    <%= f.label :release_status_confine, I18n.t("activerecord.enums.calculation.release_status.confine") %>
+    <%= f.radio_button :release_status, "release" %>
+    <%= f.label :release_status_release, I18n.t("activerecord.enums.calculation.release_status.release") %>
+  </td>
+</tr>
+ </table>
+</div>
+</div>
+<div style="text-align: center;">
+  <%= f.submit "更新する", class: "btn btn-info"  %>
 <% end %>
+</div>

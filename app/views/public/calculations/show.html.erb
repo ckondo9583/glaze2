@@ -1,55 +1,116 @@
-<h1>Public::Calculations#show</h1>
-<p>Find me in app/views/public/calculations/show.html.erb</p>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
 
-<p>タイトル: <%= @calculation.title %></p>
-<p>サブタイトル: <%= @calculation.subtitle %></p>
-<p>福島長石: <%= number_with_precision(@calculation.fukushimafeldspar, precision: 1) %></p>
-<p>炭酸リチウム: <%= number_with_precision(@calculation.lithiumcarbonate, precision: 1) %></p>
-<p>マグネサイト: <%= number_with_precision(@calculation.magnesite, precision: 1) %></p>
+<h3 style="background-color: #17a2b8; color: white; font-weight: bold; padding: 5px;"><%= @calculation.title %></h3>
 
-<p>白石石灰: <%= number_with_precision(@calculation.whitelimestone, precision: 1) %></p>
-<p>炭酸ストロンチウム: <%= number_with_precision(@calculation.strontiumcarbonate, precision: 1) %></p>
-<p>炭酸バリウム: <%= number_with_precision(@calculation.bariumcarbonate, precision: 1) %></p>
-<p>亜鉛華: <%= number_with_precision(@calculation.zincoxide, precision: 1) %></p>
-<p>カオリン: <%= number_with_precision(@calculation.kaolin, precision: 1) %></p>
-<p>福島珪石: <%= number_with_precision(@calculation.fukushimasilica, precision: 1) %></p>
+<% if @calculation.user == current_user %>
+<%= link_to "編集", edit_calculation_path(@calculation.id), class: "btn btn-primary editbtn float-right" %>
+<%= link_to "削除", calculation_path(@calculation.id), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger destroybtn float-right" %>
+<% end %>
 
-<% (1..5).each do |i| %>
-  <% additive_column = "additive#{i}" %>
-  <% additive_amount = "additive#{i}_amount" %>
-  <% if @calculation.send(additive_column).present? %>
-    <p><%= @calculation.send(additive_column) %> : <%= number_with_precision(@calculation.send(additive_amount), precision: 1) %></p>
+<table class="table table-striped table-hover">
+  <tr>
+    <th style="text-align: right; width: 40%;">タイトル</th>
+    <td class="text-center"><%= @calculation.title %></td>
+  </tr>
+  <tr>
+    <th style="text-align: right;">サブタイトル</th>
+    <td class="text-right"><%= @calculation.subtitle %></td>
+  </tr>
+  <tr>
+    <th style="text-align: right;">福島長石</th>
+    <td class="text-center"><%= number_with_precision(@calculation.fukushimafeldspar, precision: 1) %></td>
+  </tr>
+  <tr>
+    <th style="text-align: right;">炭酸リチウム</th>
+    <td class="text-center"><%= number_with_precision(@calculation.lithiumcarbonate, precision: 1) %></td>
+  </tr>
+  <tr>
+    <th style="text-align: right;">マグネサイト</th>
+    <td class="text-center"><%= number_with_precision(@calculation.magnesite, precision: 1) %></td>
+  </tr>
+  <tr>
+    <th style="text-align: right;">白石石灰</th>
+    <td class="text-center"><%= number_with_precision(@calculation.whitelimestone, precision: 1) %></td>
+  </tr>
+  <tr>
+    <th style="text-align: right;">炭酸ストロンチウム</th>
+    <td class="text-center"><%= number_with_precision(@calculation.strontiumcarbonate, precision: 1) %></td>
+  </tr>
+  <tr>
+    <th style="text-align: right;">炭酸バリウム</th>
+    <td class="text-center"><%= number_with_precision(@calculation.bariumcarbonate, precision: 1) %></td>
+  </tr>
+  <tr>
+    <th style="text-align: right;">亜鉛華</th>
+    <td class="text-center"><%= number_with_precision(@calculation.zincoxide, precision: 1) %></td>
+  </tr>
+  <tr>
+    <th style="text-align: right;">カオリン</th>
+    <td class="text-center"><%= number_with_precision(@calculation.kaolin, precision: 1) %></td>
+  </tr>
+  <tr>
+    <th style="text-align: right;">福島珪石</th>
+    <td class="text-center"><%= number_with_precision(@calculation.fukushimasilica, precision: 1) %></td>
+  </tr>
+
+  <% (1..5).each do |i| %>
+    <% additive_column = "additive#{i}" %>
+    <% additive_amount = "additive#{i}_amount" %>
+    <% if @calculation.send(additive_column).present? %>
+      <tr>
+        <th style="text-align: right;"><%= @calculation.send(additive_column) %></th>
+        <td class="text-center"><%= number_with_precision(@calculation.send(additive_amount), precision: 1) %></td>
+      </tr>
+    <% end %>
+  <% end %>
+
+  <tr>
+    <th style="text-align: right;">画像</th>
+    <td class="text-center"><%= @calculation.image %></td>
+  </tr>
+  <tr>
+    <th style="text-align: right;">メモ</th>
+    <td class="text-center"><%= @calculation.memo %></td>
+  </tr>
+  <tr>
+    <th style="text-align: right;">焼成温度</th>
+    <td class="text-center"><%= @calculation.temperature %>度</td>
+  </tr>
+  <tr>
+    <th style="text-align: right;">焼成日時</th>
+    <td class="text-center"><%= @calculation.burning_date %></td>
+  </tr>
+  <tr>
+    <th style="text-align: right;">タグ</th>
+    <td class="text-center">
+      <% @tags.each do |tag| %>
+        <%= tag.tag_name %>
+      <% end %>
+    </td>
+  </tr>
+  <tr>
+    <th style="text-align: right;">公開ステータス</th>
+    <td class="text-center"><%= t("activerecord.enums.calculation.release_status.#{@calculation.release_status}") %></td>
+  </tr>
+  <tr>
+    <th style="text-align: right;">投稿者</th>
+    <td class="text-center"><%= link_to @calculation.user.name, user_path(@calculation.user) %></td>
+  </tr>
+</table>
+
+<% if @calculation.favorited?(current_user) %>
+  <!--一致するレコードが存在する＝すでにいいね済みの場合はdestroyアクションへ-->
+  <%= link_to calculation_favorite_path(@calculation.id), method: :delete do %>
+    <span style="color:red;">お気に入り済み♡︎</span>
+  <% end %>
+<% else %>
+  <!--一致するレコードが存在しない＝まだいいねしていない場合はcreateアクションへ-->
+  <%= link_to calculation_favorites_path(@calculation.id), method: :post do %>
+    <span>お気に入りに登録する♡︎</span>
   <% end %>
 <% end %>
-<p>画像: <%= @calculation.image %></p>
-<p>メモ: <%= @calculation.memo %></p>
-<p>焼成温度: <%= @calculation.temperature %>度</p>
-<p>焼成日時: <%= @calculation.burning_date %></p>
-
-<p>タグ: <% @tags.each do |tag| %>
- <%= tag.tag_name %>
-<% end %>
-</p>
-
-
-<p>公開ステータス: <%= I18n.t("activerecord.enums.calculation.release_status.#{@calculation.release_status}") %></p>
-
-<p>投稿者： <%= link_to @calculation.user.name , user_path(@calculation.user)  %></p>
-
-<!--いいね機能-->
-<% if @calculation.favorited?(current_user) %>
-      <!--一致するレコードが存在する＝すでにいいね済みの場合はdestroyアクションへ-->
-      <%= link_to calculation_favorite_path(@calculation.id), method: :delete do %>
-          <span style="color:red;">お気に入り済み♡︎</span>
-      <% end %>
-<% else %>
-      <!--一致するレコードが存在しない＝まだいいねしていない場合はcreateアクションへ-->
-      <%= link_to calculation_favorites_path(@calculation.id), method: :post do %>
-           <span>お気に入りに登録する♡︎</span>
-      <% end %>
-<% end %>
-
-
 
 <!--コメント投稿機能-->
 
@@ -60,15 +121,14 @@
    </div>
 <% end %>
 <!--コメント一覧機能-->
+
 <% @active_comments.each do |comment| %>
-  <p><%= comment.user.name %></p>
-  <p><%= comment.content %></p>
-  <%= link_to "Delete", calculation_comment_path(comment.calculation, comment), method: :delete, remote: true, "data-confirm" => t('comments.create.delete_confirm'), class: "btn-sm btn-danger" %>
+<table class="table table-striped table-hover">
+  <tr><%= comment.user.name %>
+  <td>><%= comment.content %></td>
+  <td class="text-right"><%= link_to "Delete", calculation_comment_path(comment.calculation, comment), method: :delete, remote: true, "data-confirm" => t('comments.create.delete_confirm'), class: "btn-sm btn-danger" %>
+  </td>
+  </tr>
+  </table>
 <% end %>
 
-<% if @calculation.user == current_user %>
-
-<%= link_to "編集", edit_calculation_path(@calculation.id),class:'editbtn' %>
-<%= link_to "削除", calculation_path(@calculation.id), method: :delete, "data-confirm" => "本当に削除しますか？",class:'destroybtn' %>
-
-<% end %>

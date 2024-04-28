@@ -1,6 +1,6 @@
 class Public::CalculationsController < ApplicationController
  before_action :authenticate_user!
- before_action :validate_amount, only: [:new]
+ before_action :validate_amount, only: [:new,:create]
 
   def new
    @amount = session[:amount]

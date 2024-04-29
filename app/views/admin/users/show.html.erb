@@ -1,14 +1,38 @@
-<h1>Admin::Users#show</h1>
-<p>Find me in app/views/admin/users/show.html.erb</p>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-10">
+      <h3 style="background-color: #17a2b8; color: white; font-weight: bold; padding: 5px;"><%= @user.name %>のページ</h3>
+      
 
+ <table class="table table-striped">
+        <tbody>
+          <tr>
+            <td><h4><%= @user.name %></h4></td>
+            <td><%= link_to "編集", edit_admin_user_path, class: 'editbtn' %></td>
+          </tr>
+          <tr>
+            <td colspan="2"><p><%= @user.introduction %></p></td>
+          </tr>
+        </tbody>
+      </table>
+      
+      <h3 style="background-color: #17a2b8; color: white; font-weight: bold; padding: 5px;">計算一覧</h3>
+      <table class="table table-striped">
+        <tbody>
+          <% @calculations.each do |calculation| %>
+            <tr>
+              <td><p><%= link_to calculation.title, admin_calculation_path(calculation) %></p></td>
+            </tr>
+            <tr>
+              <td><p><%= calculation.subtitle %></p></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
 
-<h4><%= @user.name  %></h4>
-<%= link_to "編集", edit_admin_user_path,class:'editbtn' %>
-<p><%= @user.introduction  %></p>
-
-
-<% @calculations.each do |calculation| %>
-  <p><%= link_to calculation.title ,admin_calculation_path(calculation)   %></p>
-  <p><%= calculation.subtitle %></p>
-<% end %>
-
+   </div>
+  </div>
+</div>

@@ -1,10 +1,25 @@
-<h1>Admin::Calculations#index</h1>
-<p>Find me in app/views/admin/calculations/index.html.erb</p>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-８">
+<h3 style="background-color: #17a2b8; color: white; font-weight: bold; padding: 5px;">計算一覧</h3>
 
-<% @calculations.each do |calculation| %>
-  <h3><%=  link_to calculation.title, admin_calculation_path(calculation) %></h3>
-  <h4><%= calculation.subtitle %></h4>
-  <p><%= link_to calculation.user.name , admin_user_path(calculation.user) %></p>
- <p><%= t("activerecord.enums.calculation.release_status.#{calculation.release_status}") %></p>
-<% end %>
-
+<table class="table">
+  <thead>
+    <tr>
+      <th>タイトル</th>
+      <th>サブタイトル</th>
+      <th>ユーザー</th>
+      <th>公開設定</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @calculations.each do |calculation| %>
+      <tr>
+        <td><%= link_to calculation.title, admin_calculation_path(calculation) %></td>
+        <td class="text-center"><%= calculation.subtitle %></td>
+        <td class="text-center"><%= link_to calculation.user.name , admin_user_path(calculation.user) %></td>
+        <td class="text-center"><%= t("activerecord.enums.calculation.release_status.#{calculation.release_status}") %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

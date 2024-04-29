@@ -1,8 +1,26 @@
-<h1>Admin::Users#index</h1>
-<p>Find me in app/views/admin/users/index.html.erb</p>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-10">
+      <h3 style="background-color: #17a2b8; color: white; font-weight: bold; padding: 5px;">ユーザー一覧</h3>
 
-<% @users.each do |user| %>
-  <h3><%=  link_to user.name, admin_user_path(user)  %></h3>
-  <h4><%= user.introduction %></h4>
-  <h4><%= user.is_deleted %></h4>
-<% end %>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>ユーザー名</th>
+      <th class="text-center">Introduction</th>
+      <th class="text-center">アクティブ状態</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= link_to user.name, admin_user_path(user) %></td>
+        <td class="text-center"><%= user.introduction %></td>
+        <td class="text-center"><%= user.is_deleted %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>
+</div>
+</div>

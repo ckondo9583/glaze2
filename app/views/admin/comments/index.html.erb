@@ -1,13 +1,26 @@
-<h1>Admin::Comments#index</h1>
-<p>Find me in app/views/admin/comments/index.html.erb</p>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-10">
+<h3 style="background-color: #17a2b8; color: white; font-weight: bold; padding: 5px;">コメント一覧</h3>
 
-
-<p>
+<table class="table">
+  <thead>
+    <tr>
+      <th>コメント内容</th>
+      <th>ユーザー</th>
+      <th>削除</th>
+    </tr>
+  </thead>
+  <tbody>
   <% @comments.each_with_index do |comment, index| %>
-    <%= comment.content %>
-    <%= link_to @users[index].name, admin_user_path(@users[index]) %>
-    <%= link_to "削除", admin_calculation_comment_path(@calculation, comment), method: :delete, data: { confirm: "本当に削除しますか？" }, class: 'destroybtn' %>
-
+  <tr>
+   <td> <%= comment.content %></td>
+   <td class="text-center"> <%= link_to @users[index].name, admin_user_path(@users[index]) %></td>
+   <td class="text-center"> <%= link_to "削除", admin_calculation_comment_path(@calculation, comment), method: :delete, data: { confirm: "本当に削除しますか？" }, class: 'destroybtn' %></td>
+  </tr>
   <% end %>
-</p>
+</table>
+</div>
+</div>
+</div>
 

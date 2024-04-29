@@ -1,31 +1,31 @@
-<h1>Public::Users#edit</h1>
-<p>Find me in app/views/public/users/edit.html.erb</p>
-
-<h3 style="background-color: #17a2b8; color: white; font-weight: bold; padding: 5px;">ユーザー</h3>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-10">
+      <h3 style="background-color: #17a2b8; color: white; font-weight: bold; padding: 5px;">ユーザー情報編集</h3>
 
 
 
 <%= form_with model: @user do |f| %>
- <div class="formgroup">
-  <label for="inputName">Name</label><br>
-  <%= f.text_field :name, autofocus: true, id:"inputName", placeholder:"名前",class:'text_field'%><br>
+   <div class="form-group">
+          <label for="inputName">ユーザー名</label><br>
+          <%= f.text_field :name, autofocus: true, id:"inputName", placeholder:"名前", class: "form-control text_field" %><br>
+        </div>
+
+        <div class="form-group">
+          <label for="inputIntroduction">自己紹介</label><br>
+          <%= f.text_area :introduction, autofocus: true, id:"inputIntroduction", placeholder:"Introduction", class: "form-control text_area" %>
+        </div>
+
+        <div class="form-group">
+          <label for="inputEmail">メールアドレス</label><br>
+          <%= f.text_field :email, autofocus: true, id:"inputEmail", placeholder:"Email", class: "form-control text_area" %>
+        </div>
+
+         <div style="text-align: center;">
+          <%= f.submit "更新する", class: 'btn btn-primary updatebtn' %>
+        </div>
+      <% end %>
+
+      </div>
+     </div>
   </div>
-
-  <div class="formgroup">
-  <label for="inputIntroduction">Introduction</label><br>
-  <%= f.text_area :introduction, autofocus: true, id:"inputIntroduction", placeholder:"Introduction",class:'text_area'%>
-  </div>
-
-
-  <div class="formgroup">
-  <label for="email">Email</label><br>
-  <%= f.text_area :email, autofocus: true, id:"email", placeholder:"email",class:'text_area'%>
-  </div>
-
-  <div class="formgroup">
-  <%= f.submit "Update User",class:'updatebtn' %>
-  </div>
-
-
-<% end %>
-

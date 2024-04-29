@@ -11,6 +11,8 @@ class Admin::CalculationsController < ApplicationController
  def show
   @calculation = Calculation.find(params[:id])
   puts @calculation.inspect
+  @tags = @calculation.tags
+  @active_comments = @calculation.comments.joins(:user).where(users: { is_deleted: false })
  end
 
   def update

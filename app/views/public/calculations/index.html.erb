@@ -18,7 +18,7 @@
       <tbody>
         <% @calculations.each do |calculation| %>
           <tr>
-            <td><%= link_to calculation.title, calculation %></td>
+            <td class="text-left"><%= link_to calculation.title, calculation %></td>
             <td><%= calculation.subtitle %></td>
             <td><%= link_to calculation.user.name, user_path(calculation.user) %></td>
           </tr>

@@ -89,12 +89,16 @@
   <td class="text-center"><%= f.datetime_field :burning_date %></td>
 </tr>
 <tr>
-  <th style="text-align: right; width: 40%;">
-    <%= label_tag 'ctag_ids', 'タグ' %>
-  </th>
-  <td class="text-center">
-    <%= f.collection_check_boxes :tag_ids, Tag.all, :id, :tag_name %>
-  </td>
+  <% Tag.all.each_with_index do |tag, index| %>
+    <tr>
+      <% if index == 0 %>
+        <th style="text-align: right; width: 40%;" rowspan="<%= Tag.all.size %>">タグ</th>
+      <% end %>
+      <td class="table-light"><%= check_box_tag 'calculation[tag_ids][]', tag.id, @calculation.tag_ids.include?(tag.id), id: "tag_#{tag.id}" %>
+        <%= tag.tag_name %>
+      </td>
+    </tr>
+  <% end %>
 </tr>
 
  <tr>
@@ -107,9 +111,11 @@
   </td>
 </tr>
  </table>
-</div>
-</div>
+
 <div style="text-align: center;">
   <%= f.submit "更新する", class: "btn btn-info"  %>
 <% end %>
+</div>
+</div>
+</div>
 </div>

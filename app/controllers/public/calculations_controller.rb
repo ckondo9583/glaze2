@@ -71,7 +71,7 @@ class Public::CalculationsController < ApplicationController
 
   def edit
    @calculation = Calculation.find(params[:id])
-    redirect_to calculations_path unless @calculation.user == current_user
+   render :edit unless @calculation.user == current_user
   end
 
   def update

@@ -73,8 +73,21 @@
   </tr>
 <% end %>
   <tr>
-   <th style="text-align: right;"><%= f.label :image, "画像", for: 'calculation_image' %></th>
-   <td class="text-center"><%= f.file_field :image, id: 'calculation_image' %></td>
+    <th style="text-align: right;"><%= f.label :images, "画像", for: 'calculation_images' %></th>
+    <td class="text-center">
+      <% if @calculation.images.attached? %>
+        <% @calculation.images.each do |image| %>
+          <% if image.variable? %>
+            <%= image_tag url_for(image.variant(resize: "200x200")), size: "200x200" %>
+          <% else %>
+            <%= image_tag image, size: "200x200" %>
+          <% end %>
+        <% end %>
+      <% else %>
+        画像がありません
+      <% end %>
+     <%= f.file_field :images, multiple: true, id: 'calculation_images' %>
+    </td>
   </tr>
   <tr>
    <th style="text-align: right;"><%= f.label :memo, "メモ", for: 'calculation_memo' %></th>

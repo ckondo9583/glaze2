@@ -65,11 +65,18 @@
       </tr>
     <% end %>
   <% end %>
-
-  <tr>
-    <th style="text-align: right;">画像</th>
-    <td class="text-center"><%= @calculation.image %></td>
-  </tr>
+<tr>
+  <th style="text-align: right;">画像</th>
+  <td class="text-center">
+    <% if @calculation.images.present? %>
+      <% @calculation.images.each do |image| %>
+        <%= image_tag image, size: "200x200" %>
+      <% end %>
+    <% else %>
+      画像がありません
+    <% end %>
+  </td>
+</tr>
   <tr>
     <th style="text-align: right;">メモ</th>
     <td class="text-center"><%= @calculation.memo %></td>

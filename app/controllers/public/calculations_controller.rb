@@ -1,8 +1,9 @@
 class Public::CalculationsController < ApplicationController
  before_action :authenticate_user!
- before_action :validate_amount, only: [:new,:create]
+ before_action :validate_amount, only: [:create]
 
   def new
+   @calculation = Calculation.new
    @amount = session[:amount]
    @fukushimafeldspar = session[:fukushimafeldspar]
    @lithiumcarbonate = session[:lithiumcarbonate]
@@ -14,14 +15,13 @@ class Public::CalculationsController < ApplicationController
    @kaolin =  session[:kaolin]
    @fukushimasilica =  session[:fukushimasilica]
    validate_amount
-   @calculation = Calculation.new
+  
   end
 
   def create
   @calculation = Calculation.new(calculation_params)
   @calculation.tag_ids = params[:calculation][:tag_ids]
   @calculation.user_id = current_user.id
-
   if @calculation.save
    redirect_to @calculation
   else
@@ -35,8 +35,7 @@ class Public::CalculationsController < ApplicationController
    @zincoxide =  session[:zincoxide]
    @kaolin =  session[:kaolin]
    @fukushimasilica =  session[:fukushimasilica]
-
-    render :new
+   render :new
   end
   end
 
@@ -56,6 +55,7 @@ class Public::CalculationsController < ApplicationController
    # @tag = Tag.find(@calculation.tag_id)
    # @calculation_tags = @calculation.tags
    @tags = @calculation.tags
+   @images = @calculation.images
 
   end
 
@@ -71,6 +71,7 @@ class Public::CalculationsController < ApplicationController
 
   def edit
    @calculation = Calculation.find(params[:id])
+   @images = @calculation.images
    render :edit unless @calculation.user == current_user
   end
 
@@ -94,7 +95,7 @@ class Public::CalculationsController < ApplicationController
   private
 
  def calculation_params
-  params.require(:calculation).permit(:release_status, :fukushimafeldspar, :lithiumcarbonate, :magnesite, :whitelimestone, :strontiumcarbonate, :bariumcarbonate, :zincoxide, :kaolin, :fukushimasilica, :title, :subtitle, :additive1, :additive2, :additive3, :additive4, :additive5, :memo, :tag_id, :temperature, :image, :additive1_amount, :additive2_amount, :additive3_amount, :additive4_amount, :additive5_amount, :burning_date, :memo, favorites_attributes: [:id, :user_id, :_destroy], tag_ids: [])
+  params.require(:calculation).permit(:release_status, :fukushimafeldspar, :lithiumcarbonate, :magnesite, :whitelimestone, :strontiumcarbonate, :bariumcarbonate, :zincoxide, :kaolin, :fukushimasilica, :title, :subtitle, :additive1, :additive2, :additive3, :additive4, :additive5, :memo, :tag_id, :temperature, :additive1_amount, :additive2_amount, :additive3_amount, :additive4_amount, :additive5_amount, :burning_date, :memo, favorites_attributes: [:id, :user_id, :_destroy], tag_ids: [], images: [])
  end
 
 def validate_amount

@@ -9,7 +9,7 @@
 <% end %>
 　</div>
 <h3 class="font-weight-bold">計算結果を保存</h3>
-<%= form_with(model: @calculation, url: calculations_path, local: true) do |f| %>
+<%= form_with(model: @calculation, url: calculations_path) do |f| %>
      <table class="table table-striped table-hover">
       <tr>
           <th style="text-align: right; width: 40%;"><%= f.label :title,"タイトル"%></th>
@@ -100,8 +100,10 @@
          <td class="text-center"><%= f.text_field :additive5_amount, value: @additive5_amount, class: "w-100 field-height"%></td>
     </tr>
     <tr>
-         <th style="text-align: right;"> <%= f.label :image,"画像"%></th>
-          <td class="text-center"><%= f.file_field :image, value: @image, class: "w-100 field-height" %></td>
+      <th style="text-align: right;"><%= f.label :images, "画像", for: 'calculation_images' %></th>
+      <td class="text-center">
+        <%= f.file_field :images, multiple: true, id: 'calculation_images' %>
+      </td>
     </tr>
     <tr>
          <th style="text-align: right;"><%= f.label :memo,"メモ"%></th>

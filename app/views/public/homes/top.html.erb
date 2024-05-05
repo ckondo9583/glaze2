@@ -2,126 +2,129 @@
   <div class="row justify-content-center">
     <div class="col-md-8">
 
+     <h3 style="background-color: #17a2b8; color: white; font-weight: bold; padding: 5px;">ゼーゲル式から調合量を計算</h3>
 
-<strong style="color: blue;">ゼーゲル式から材料の調合割合を求めます。</strong>
-     <% flash.each do |key, message| %>
-      <div class="alert alert-danger font-weight-bold">
+<!--バリデーションメッセージ-->
+        <% flash.each do |key, message| %>
+         <div class="alert alert-danger font-weight-bold">
         <%= message %>
-      </div>
+         </div>
         <% end %>
 
+<!--計算機能部分-->
       <p>ゼーゲル式を入力してください。</p>
 
-<%= form_tag(calculate_path) do %>
- <table class="table table-striped table-hover">
-  <tr>
-    <th style="text-align: right;"><%= label_tag :kano, "KNaO" %></th>
-    <td><%= text_field_tag :kano %></td>
-  </tr>
-  <tr>
-    <th style="text-align: right;"><%= label_tag :li2o, "Li2O" %></th>
-    <td><%= text_field_tag :li2o %></td>
-  </tr>
-  <tr>
-    <th style="text-align: right;"><%= label_tag :mgo, "MgO" %></th>
-    <td><%= text_field_tag :mgo %></td>
-  </tr>
-  <tr>
-    <th style="text-align: right;"><%= label_tag :cao, "CaO" %></th>
-    <td><%= text_field_tag :cao %></td>
-  </tr>
-  <tr>
-    <th style="text-align: right;"><%= label_tag :sro, "SrO" %></th>
-    <td><%= text_field_tag :sro %></td>
-  </tr>
-  <tr>
-    <th style="text-align: right;"><%= label_tag :bao, "BaO" %></th>
-    <td><%= text_field_tag :bao %></td>
-  </tr>
-  <tr>
-    <th style="text-align: right;"><%= label_tag :zno, "ZnO" %></th>
-    <td><%= text_field_tag :zno %></td>
-  </tr>
-</table>
-<table class="table table-striped table-hover">
-  <tr class="table-active">
-  <th style="text-align: right;"><%= label_tag :al2o3, "Al2O3" %></th>
-  <td><%= text_field_tag :al2o3 %></td>
-</tr>
-<tr class="table-active">
-  <th style="text-align: right;"><%= label_tag :sio2, "SiO2" %></th>
-  <td><%= text_field_tag :sio2 %></td>
-</tr>
-</table>
-<table class="table table-striped table-hover">
-  <tr>
-    <th style="text-align: right;"><%= label_tag :amount, "調合量（g）" %></th>
-    <td><%= text_field_tag :amount %></td>
-  </tr>
-</table>
- <div style="text-align: center;">
-    <%= submit_tag "計算する", class: "btn btn-info" %>
-  </div>
-<% end %>
+      <%= form_tag(calculate_path) do %>
+       <table class="table table-striped table-hover">
+          <tr>
+            <th style="text-align: right;"><%= label_tag :kano, "KNaO" %></th>
+            <td><%= text_field_tag :kano %></td>
+          </tr>
+          <tr>
+            <th style="text-align: right;"><%= label_tag :li2o, "Li2O" %></th>
+            <td><%= text_field_tag :li2o %></td>
+          </tr>
+          <tr>
+            <th style="text-align: right;"><%= label_tag :mgo, "MgO" %></th>
+            <td><%= text_field_tag :mgo %></td>
+          </tr>
+          <tr>
+            <th style="text-align: right;"><%= label_tag :cao, "CaO" %></th>
+            <td><%= text_field_tag :cao %></td>
+          </tr>
+          <tr>
+            <th style="text-align: right;"><%= label_tag :sro, "SrO" %></th>
+            <td><%= text_field_tag :sro %></td>
+          </tr>
+          <tr>
+            <th style="text-align: right;"><%= label_tag :bao, "BaO" %></th>
+            <td><%= text_field_tag :bao %></td>
+          </tr>
+          <tr>
+            <th style="text-align: right;"><%= label_tag :zno, "ZnO" %></th>
+            <td><%= text_field_tag :zno %></td>
+          </tr>
+        </table>
+        <table class="table table-striped table-hover">
+          <tr class="table-active">
+          <th style="text-align: right;"><%= label_tag :al2o3, "Al2O3" %></th>
+          <td><%= text_field_tag :al2o3 %></td>
+        </tr>
+        <tr class="table-active">
+          <th style="text-align: right;"><%= label_tag :sio2, "SiO2" %></th>
+          <td><%= text_field_tag :sio2 %></td>
+        </tr>
+        </table>
+        <table class="table table-striped table-hover">
+          <tr>
+            <th style="text-align: right;"><%= label_tag :amount, "調合量（g）" %></th>
+            <td><%= text_field_tag :amount %></td>
+          </tr>
+        </table>
+         <div style="text-align: center;">
+            <%= submit_tag "計算する", class: "btn btn-info" %>
+          </div>
+        <% end %>
+<!--計算結果-->
+        <table class="table table-info table-striped table-hover">
+          <% materials = [
+            { name: "長石", value: @fukushimafeldspar },
+            { name: "炭酸リチウム", value: @lithiumcarbonate },
+            { name: "マグネサイト", value: @magnesite },
+            { name: "白石石灰", value: @whitelimestone },
+            { name: "炭酸ストロンチウム", value: @strontiumcarbonate },
+            { name: "炭酸バリウム", value: @bariumcarbonate },
+            { name: "亜鉛華", value: @zincoxide },
+            { name: "韓国カオリン", value: @kaolin },
+            { name: "福島珪石", value: @fukushimasilica }
+          ] %>
 
-<table class="table table-info table-striped table-hover">
-  <% materials = [
-    { name: "長石", value: @fukushimafeldspar },
-    { name: "炭酸リチウム", value: @lithiumcarbonate },
-    { name: "マグネサイト", value: @magnesite },
-    { name: "白石石灰", value: @whitelimestone },
-    { name: "炭酸ストロンチウム", value: @strontiumcarbonate },
-    { name: "炭酸バリウム", value: @bariumcarbonate },
-    { name: "亜鉛華", value: @zincoxide },
-    { name: "韓国カオリン", value: @kaolin },
-    { name: "福島珪石", value: @fukushimasilica }
-  ] %>
+        <% materials.each do |material| %>
+          <% if material[:value] && material[:value] < 0 %>
+            <% @has_negative_value = true %>
+            <tr class="table-danger">
+              <th style="text-align: right;">
+                <%= material[:name] %>
+              </th>
+              <td style="text-align: right; color: red;">
+                <%= sprintf("%.1f", material[:value]) %>(g)
+              </td>
+            </tr>
+          <% elsif material[:value] %>
+            <tr>
+              <th style="text-align: right;">
+                <%= material[:name] %>
+              </th>
+              <td style="text-align: right;">
+                <%= sprintf("%.1f", material[:value]) %>(g)
+              </td>
+            </tr>
+          <% end %>
+        <% end %>
+<!--バリデーション機能-->
+        <% if @has_negative_value %>
+          <strong style="color: red;">計算結果にマイナスの値があります。保存してもよろしいですか。</strong>
+          <p style="color: red;">10以上のマイナス値が含まれると保存できません。</p>
+        <% end %>
 
-<% materials.each do |material| %>
-  <% if material[:value] && material[:value] < 0 %>
-    <% @has_negative_value = true %>
-    <tr class="table-danger">
-      <th style="text-align: right;">
-        <%= material[:name] %>
-      </th>
-      <td style="text-align: right; color: red;">
-        <%= sprintf("%.1f", material[:value]) %>(g)
-      </td>
-    </tr>
-  <% elsif material[:value] %>
-    <tr>
-      <th style="text-align: right;">
-        <%= material[:name] %>
-      </th>
-      <td style="text-align: right;">
-        <%= sprintf("%.1f", material[:value]) %>(g)
-      </td>
-    </tr>
-  <% end %>
-<% end %>
+        </table>
 
-<% if @has_negative_value %>
-  <strong style="color: red;">計算結果にマイナスの値があります。保存してもよろしいですか。</strong>
-  <p style="color: red;">10以上のマイナス値が含まれると保存できません。</p>
-<% end %>
+        <table class="table table-info table-striped table-hover">
+         <% if @total %>
+            <tr>
+              <th style="text-align: right;">調合量</th>
+              <td style="text-align: right;"><%= sprintf("%.1f", @total) %>(g)</td>
+            </tr>
+          <% end %>
+        </table>
 
-</table>
+        <div style="text-align: center;">
+          <% if @total %>
+            <%= link_to "保存する", new_calculation_url, class: "btn btn-info" %>
+          <% end %>
+        </div>
 
-<table class="table table-info table-striped table-hover">
- <% if @total %>
-    <tr>
-      <th style="text-align: right;">調合量</th>
-      <td style="text-align: right;"><%= sprintf("%.1f", @total) %>(g)</td>
-    </tr>
-  <% end %>
-</table>
-
-<div style="text-align: center;">
-  <% if @total %>
-    <%= link_to "保存する", new_calculation_url, class: "btn btn-info" %>
-  <% end %>
-</div>
-    </div>
-  </div>
+      </div>
+   </div>
 </div>
 

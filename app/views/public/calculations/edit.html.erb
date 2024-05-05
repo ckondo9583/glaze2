@@ -1,134 +1,136 @@
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-md-８">
-<h3 style="background-color: #17a2b8; color: white; font-weight: bold; padding: 5px;">投稿編集ページ</h3>
+
+    <h3 style="background-color: #17a2b8; color: white; font-weight: bold; padding: 5px;">投稿編集ページ</h3>
 
 
-<%= form_with model: @calculation, url: calculation_path(@calculation), method: :patch do |f| %>
+    <%= form_with model: @calculation, url: calculation_path(@calculation), method: :patch do |f| %>
 
-   <table class="table table-striped table-hover">
-  <tr>
-  <th style="text-align: right; width: 40%;"><%= f.label :title, "タイトル", for: 'calculation_title' %></th>
-  <td class="text-center"><%= f.text_field :title, id: 'calculation_title' %></td>
-  </tr>
-  <tr>
-    <th style="text-align: right;"><%= f.label :subtitle, "サブタイトル", for: 'calculation_subtitle' %></th>
-    <td class="text-center"><%= f.text_field :subtitle, id: 'calculation_subtitle' %></td>
-  </tr>
+       <table class="table table-striped table-hover">
+         <tr>
+           <th style="text-align: right; width: 40%;"><%= f.label :title, "タイトル", for: 'calculation_title' %></th>
+           <td class="text-center"><%= f.text_field :title, id: 'calculation_title' %></td>
+         </tr>
+         <tr>
+            <th style="text-align: right;"><%= f.label :subtitle, "サブタイトル", for: 'calculation_subtitle' %></th>
+            <td class="text-center"><%= f.text_field :subtitle, id: 'calculation_subtitle' %></td>
+          </tr>
 
-  <tr>
-    <th style="text-align: right;"><%= f.label :fukushimafeldspar, "福島長石", for: 'calculation_fukushimafeldspar' %></th>
-    <td class="text-center"><%= f.number_field :fukushimafeldspar, step: 0.1 , id: 'calculation_fukushimafeldspar'%></td>
- </tr>
-  <tr>
-    <th style="text-align: right;"><%= f.label :lithiumcarbonate, "炭酸リチウム", for: 'calculation_lithiumcarbonate' %></th>
-    <td class="text-center"><%= f.number_field :lithiumcarbonate, step: 0.1 , id: 'calculation_lithiumcarbonate'%></td>
- </tr>
-  <tr>
-    <th style="text-align: right;"><%= f.label :magnesite, "マグネサイト" , for: 'calculation_magnesite'%></th>
-    <td class="text-center"><%= f.number_field :magnesite, step: 0.1, id: 'calculation_magnesite' %></td>
-  </tr>
-  <tr>
-   <th style="text-align: right;"><%= f.label :whitelimestone, "白石石灰", for: 'calculation_whitelimestone' %></th>
-   <td class="text-center"><%= f.number_field :whitelimestone, step: 0.1 , id: 'calculation_whitelimestone'%></td>
-   </tr>
-  <tr>
-   <th style="text-align: right;"><%= f.label :strontiumcarbonate, "炭酸ストロンチウム", for: 'calculation_strontiumcarbonate' %></th>
-   <td class="text-center"><%= f.number_field :strontiumcarbonate, step: 0.1, id: 'calculation_strontiumcarbonate' %></td>
-   </tr>
-  <tr>
-    <th style="text-align: right;"><%= f.label :bariumcarbonate, "炭酸バリウム", for: 'calculation_bariumcarbonate' %></th>
-    <td class="text-center"><%= f.number_field :bariumcarbonate, step: 0.1, id: 'calculation_bariumcarbonate' %></td>
-  </tr>
-  <tr>
-   <th style="text-align: right;"><%= f.label :zincoxide, "亜鉛華" , for: 'calculation_zincoxide'%></th>
-   <td class="text-center"><%= f.number_field :zincoxide, step: 0.1, id: 'calculation_zincoxide' %></td>
-  </tr>
-  <tr>
-   <th style="text-align: right;"><%= f.label :kaolin, "カオリン" , for: 'calculation_kaolin'%></th>
-   <td class="text-center"><%= f.number_field :kaolin, step: 0.1 , id: 'calculation_kaolin'%></td>
-  </tr>
-  <tr>
-   <th style="text-align: right;"><%= f.label :fukushimasilica, "福島珪石" , for: 'calculation_fukushimasilica'%></th>
-   <td class="text-center"><%= f.number_field :fukushimasilica, step: 0.1, id: 'calculation_fukushimasilica' %></td>
-  </tr>
-  <% (1..5).each do |i| %>
-  <% additive_column = "additive#{i}" %>
-  <% additive_amount = "additive#{i}_amount" %>
-  <tr>
-    <th style="text-align: right;">
-      <%= f.label additive_column, "添加物#{i}", for: "calculation_#{additive_column}" %>
-    </th>
-    <td class="text-center">
-      <%= f.text_field additive_column, id: "calculation_#{additive_column}", value: @calculation.send(additive_column) %>
-    </td>
-  </tr>
-  <tr>
-    <th style="text-align: right;">
-      <%= f.label additive_amount, "添加物#{i}配合量(g)", for: "calculation_#{additive_amount}" %>
-    </th>
-    <td class="text-center">
-      <%= f.text_field additive_amount, id: "calculation_#{additive_amount}", value: @calculation.send(additive_amount) %>
-    </td>
-  </tr>
-<% end %>
-  <tr>
-    <th style="text-align: right;"><%= f.label :images, "画像", for: 'calculation_images' %></th>
-    <td class="text-center">
-      <% if @calculation.images.attached? %>
-        <% @calculation.images.each do |image| %>
-          <% if image.variable? %>
-            <%= image_tag url_for(image.variant(resize: "200x200")), size: "200x200" %>
-          <% else %>
-            <%= image_tag image, size: "200x200" %>
-          <% end %>
+          <tr>
+            <th style="text-align: right;"><%= f.label :fukushimafeldspar, "福島長石", for: 'calculation_fukushimafeldspar' %></th>
+            <td class="text-center"><%= f.number_field :fukushimafeldspar, step: 0.1 , id: 'calculation_fukushimafeldspar'%></td>
+         </tr>
+          <tr>
+            <th style="text-align: right;"><%= f.label :lithiumcarbonate, "炭酸リチウム", for: 'calculation_lithiumcarbonate' %></th>
+            <td class="text-center"><%= f.number_field :lithiumcarbonate, step: 0.1 , id: 'calculation_lithiumcarbonate'%></td>
+         </tr>
+          <tr>
+            <th style="text-align: right;"><%= f.label :magnesite, "マグネサイト" , for: 'calculation_magnesite'%></th>
+            <td class="text-center"><%= f.number_field :magnesite, step: 0.1, id: 'calculation_magnesite' %></td>
+          </tr>
+          <tr>
+           <th style="text-align: right;"><%= f.label :whitelimestone, "白石石灰", for: 'calculation_whitelimestone' %></th>
+           <td class="text-center"><%= f.number_field :whitelimestone, step: 0.1 , id: 'calculation_whitelimestone'%></td>
+           </tr>
+          <tr>
+           <th style="text-align: right;"><%= f.label :strontiumcarbonate, "炭酸ストロンチウム", for: 'calculation_strontiumcarbonate' %></th>
+           <td class="text-center"><%= f.number_field :strontiumcarbonate, step: 0.1, id: 'calculation_strontiumcarbonate' %></td>
+           </tr>
+          <tr>
+            <th style="text-align: right;"><%= f.label :bariumcarbonate, "炭酸バリウム", for: 'calculation_bariumcarbonate' %></th>
+            <td class="text-center"><%= f.number_field :bariumcarbonate, step: 0.1, id: 'calculation_bariumcarbonate' %></td>
+          </tr>
+          <tr>
+           <th style="text-align: right;"><%= f.label :zincoxide, "亜鉛華" , for: 'calculation_zincoxide'%></th>
+           <td class="text-center"><%= f.number_field :zincoxide, step: 0.1, id: 'calculation_zincoxide' %></td>
+          </tr>
+          <tr>
+           <th style="text-align: right;"><%= f.label :kaolin, "カオリン" , for: 'calculation_kaolin'%></th>
+           <td class="text-center"><%= f.number_field :kaolin, step: 0.1 , id: 'calculation_kaolin'%></td>
+          </tr>
+          <tr>
+           <th style="text-align: right;"><%= f.label :fukushimasilica, "福島珪石" , for: 'calculation_fukushimasilica'%></th>
+           <td class="text-center"><%= f.number_field :fukushimasilica, step: 0.1, id: 'calculation_fukushimasilica' %></td>
+          </tr>
+            <% (1..5).each do |i| %>
+            <% additive_column = "additive#{i}" %>
+            <% additive_amount = "additive#{i}_amount" %>
+          <tr>
+            <th style="text-align: right;">
+              <%= f.label additive_column, "添加物#{i}", for: "calculation_#{additive_column}" %>
+            </th>
+            <td class="text-center">
+              <%= f.text_field additive_column, id: "calculation_#{additive_column}", value: @calculation.send(additive_column) %>
+            </td>
+          </tr>
+          <tr>
+            <th style="text-align: right;">
+              <%= f.label additive_amount, "添加物#{i}配合量(g)", for: "calculation_#{additive_amount}" %>
+            </th>
+            <td class="text-center">
+              <%= f.text_field additive_amount, id: "calculation_#{additive_amount}", value: @calculation.send(additive_amount) %>
+            </td>
+          </tr>
         <% end %>
-      <% else %>
-        画像がありません
-      <% end %>
-     <%= f.file_field :images, multiple: true, id: 'calculation_images' %>
-    </td>
-  </tr>
-  <tr>
-   <th style="text-align: right;"><%= f.label :memo, "メモ", for: 'calculation_memo' %></th>
-   <td class="text-center"><%= f.text_area :memo, id: 'calculation_memo' %></td>
- </tr>
-  <tr>
-   <th style="text-align: right;"><%= f.label :temperature, "焼成温度" , for: 'calculation_temperature'%></th>
-   <td class="text-center"><%= f.number_field :temperature , id: 'calculation_temperature'%></td>
- </tr>
- <tr>
-  <th style="text-align: right;"><%= f.label :burning_date, "焼成日時" %></th>
-  <td class="text-center"><%= f.datetime_field :burning_date %></td>
-</tr>
-<tr>
-  <% Tag.all.each_with_index do |tag, index| %>
-    <tr>
-      <% if index == 0 %>
-        <th style="text-align: right; width: 40%;" rowspan="<%= Tag.all.size %>">タグ</th>
-      <% end %>
-      <td class="table-light"><%= check_box_tag 'calculation[tag_ids][]', tag.id, @calculation.tag_ids.include?(tag.id), id: "tag_#{tag.id}" %>
-        <%= tag.tag_name %>
-      </td>
-    </tr>
-  <% end %>
-</tr>
+          <tr>
+            <th style="text-align: right;"><%= f.label :images, "画像", for: 'calculation_images' %></th>
+            <td class="text-center">
+              <% if @calculation.images.attached? %>
+                <% @calculation.images.each do |image| %>
+                  <% if image.variable? %>
+                    <%= image_tag url_for(image.variant(resize: "200x200")), size: "200x200" %>
+                  <% else %>
+                    <%= image_tag image, size: "200x200" %>
+                  <% end %>
+                <% end %>
+              <% else %>
+                画像がありません
+              <% end %>
+             <%= f.file_field :images, multiple: true, id: 'calculation_images' %>
+            </td>
+          </tr>
+          <tr>
+           <th style="text-align: right;"><%= f.label :memo, "メモ", for: 'calculation_memo' %></th>
+           <td class="text-center"><%= f.text_area :memo, id: 'calculation_memo' %></td>
+         </tr>
+          <tr>
+           <th style="text-align: right;"><%= f.label :temperature, "焼成温度" , for: 'calculation_temperature'%></th>
+           <td class="text-center"><%= f.number_field :temperature , id: 'calculation_temperature'%></td>
+         </tr>
+         <tr>
+          <th style="text-align: right;"><%= f.label :burning_date, "焼成日時" %></th>
+          <td class="text-center"><%= f.datetime_field :burning_date %></td>
+        </tr>
+        <tr>
+          <% Tag.all.each_with_index do |tag, index| %>
+            <tr>
+              <% if index == 0 %>
+                <th style="text-align: right; width: 40%;" rowspan="<%= Tag.all.size %>">タグ</th>
+              <% end %>
+              <td class="table-light"><%= check_box_tag 'calculation[tag_ids][]', tag.id, @calculation.tag_ids.include?(tag.id), id: "tag_#{tag.id}" %>
+                <%= tag.tag_name %>
+              </td>
+            </tr>
+          <% end %>
+        </tr>
 
- <tr>
-  <th style="text-align: right;">公開設定</th>
-  <td class="text-center">
-    <%= f.radio_button :release_status, "confine" %>
-    <%= f.label :release_status_confine, I18n.t("activerecord.enums.calculation.release_status.confine") %>
-    <%= f.radio_button :release_status, "release" %>
-    <%= f.label :release_status_release, I18n.t("activerecord.enums.calculation.release_status.release") %>
-  </td>
-</tr>
- </table>
+         <tr>
+          <th style="text-align: right;">公開設定</th>
+          <td class="text-center">
+            <%= f.radio_button :release_status, "confine" %>
+            <%= f.label :release_status_confine, I18n.t("activerecord.enums.calculation.release_status.confine") %>
+            <%= f.radio_button :release_status, "release" %>
+            <%= f.label :release_status_release, I18n.t("activerecord.enums.calculation.release_status.release") %>
+          </td>
+        </tr>
+         </table>
 
-<div style="text-align: center;">
-  <%= f.submit "更新する", class: "btn btn-info"  %>
-<% end %>
-</div>
-</div>
-</div>
+        <div style="text-align: center;">
+          <%= f.submit "更新する", class: "btn btn-info"  %>
+        <% end %>
+        </div>
+
+    </div>
+  </div>
 </div>

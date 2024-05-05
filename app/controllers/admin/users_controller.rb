@@ -3,19 +3,15 @@ class Admin::UsersController < ApplicationController
   def index
     # アクティブユーザーだけ表示
     @users = User.where(is_deleted: false)
-  
-    @calculation = Calculation.first
   end
 
   def show
     @user = User.find(params[:id])
     @calculations = @user.calculations
-    @calculation = Calculation.first
   end
 
   def edit
     @user = User.find(params[:id])
-    @calculation = Calculation.first
   end
 
    def update

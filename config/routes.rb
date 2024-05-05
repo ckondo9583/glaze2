@@ -24,8 +24,9 @@ Rails.application.routes.draw do
     resources :users , only:[:index,:show,:edit,:update]
     resources :tags , only:[:index, :create, :edit, :update, :destroy]
     resources :calculations , only:[:index,:show,:update,:destroy] do
-    resources :comments , only:[:index,:destroy]
+    resources :comments , only:[:destroy]
     end
+    resources :comments , only:[:index]
     get 'homes/top'
 
   end

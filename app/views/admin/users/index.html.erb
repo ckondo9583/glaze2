@@ -3,24 +3,25 @@
     <div class="col-md-10">
       <h3 style="background-color: #17a2b8; color: white; font-weight: bold; padding: 5px;">ユーザー一覧</h3>
 
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>ユーザー名</th>
-      <th class="text-center">自己紹介</th>
-      <th class="text-center">アクティブ状態</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @users.each do |user| %>
-      <tr>
-        <td><%= link_to user.name, admin_user_path(user) %></td>
-        <td class="text-center"><%= user.introduction %></td>
-        <td class="text-center"><%= user.is_deleted %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-</div>
-</div>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>ユーザー名</th>
+            <th class="text-center">自己紹介</th>
+            <th class="text-center">アクティブ状態</th>
+          </tr>
+        </thead>
+        
+        <tbody>
+          <% @users.each do |user| %>
+            <tr>
+              <td><%= link_to user.name, admin_user_path(user) %></td>
+              <td class="text-center"><%= user.introduction %></td>
+              <td class="text-center"><%= user.is_deleted %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>

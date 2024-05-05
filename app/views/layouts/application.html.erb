@@ -14,8 +14,6 @@
   <body>
     <script src="https://kit.fontawesome.com/92bef9f57d.js" crossorigin="anonymous"></script>
   <header>
-  <!--ここから修正後のコード-->
-
 
   <nav class="navbar navbar-expand-lg navbar-light bg-info">
     <div class="container-fluid">
@@ -27,7 +25,7 @@
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-
+<!--ユーザーがサインインしているとき-->
       <% if user_signed_in? %>
         <li class="nav-item">
           <%= link_to "計算ページ", user_top_path, class: "nav-link text-light" %>
@@ -42,6 +40,7 @@
           <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "nav-link text-light" %>
         </li>
 
+<!--管理者がサインインしているとき-->
       <% elsif admin_signed_in? %>
         <li class="nav-item">
           <%= link_to "計算一覧", admin_calculations_path, class: "nav-link text-light" %>
@@ -53,12 +52,12 @@
           <%= link_to "ユーザー一覧", admin_users_path, class: "nav-link text-light" %>
         </li>
         <li class="nav-item">
-          <%= link_to "コメント一覧",  admin_calculation_comments_path(@calculation.id), class: "nav-link text-light" %>
+          <%= link_to "コメント一覧",  admin_comments_path, class: "nav-link text-light" %>
         </li>
         <li class="nav-item">
           <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "nav-link text-light" %>
         </li>
-
+<!--どちらもログインしていないとき-->
       <% else %>
         <li class="nav-item">
           <%= link_to "新規登録", new_user_registration_path, class: "nav-link text-light" %>
@@ -76,6 +75,7 @@
     </div>
   </nav>
   </header>
+
 <main style="margin-top: 20px;">
 </main>
 

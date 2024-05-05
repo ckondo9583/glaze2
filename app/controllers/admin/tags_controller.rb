@@ -5,7 +5,7 @@ class Admin::TagsController < ApplicationController
  def index
     @tags = Tag.all
     @tag = Tag.new
-    @calculation = Calculation.first
+   
  end
 
 
@@ -24,7 +24,6 @@ end
 
 
   def edit
-    @calculation = Calculation.first
     @tag = Tag.find(params[:id])
   end
   
@@ -39,7 +38,6 @@ end
   end
 
   def destroy
-    @calculation = Calculation.first
     @tag = Tag.find(params[:id])
     @tag.destroy
     redirect_to admin_tags_path, notice: 'タグが削除されました'

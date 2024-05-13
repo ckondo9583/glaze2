@@ -7,7 +7,7 @@ class CreateCalculations < ActiveRecord::Migration[6.1]
       t.integer :temperature
       t.integer :tag_id
       t.text :memo
-      t.json :images, default: [], array: true
+      t.json :images, array: true
       t.text :title, null: false
       t.text :subtitle
       t.integer :release_status, null: false, default: 0
